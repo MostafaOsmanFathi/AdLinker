@@ -16,7 +16,7 @@ userRouter.route('/admin/deleteAllUsers').delete(userValidation.emailValidation,
 /// Unauthorized Use
 userRouter.route('/user/register').post(userValidation.registerUserValidation,
     userController.registerUser);
-userRouter.route('/user/login').get(userValidation.loginUserValidation, userController.loginUser);
+userRouter.route('/user/login').post(userValidation.loginUserValidation, userController.loginUser);
 
 
 module.exports = userRouter;
