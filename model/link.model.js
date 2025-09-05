@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const linkSchema = new mongoose.Model(
+const linkSchema = new mongoose.Schema(
     {
         original_link: {
             type: String,
@@ -9,10 +9,16 @@ const linkSchema = new mongoose.Model(
         shorten_link: {
             type: String,
             required: true,
+            unique: true
         },
         publisher_name: {
             type: String,
             required: true,
+        },
+        publisher_email: {
+            type: String,
+            required: true,
+            email: true,
         },
         number_of_visitors: {
             type: Number,
@@ -21,6 +27,6 @@ const linkSchema = new mongoose.Model(
     }
 )
 
-const linkModel = mongoose.model("LinkModel", linkSchema);
+const linkModel = mongoose.model("links", linkSchema);
 module.exports = linkModel;
 

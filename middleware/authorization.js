@@ -22,6 +22,11 @@ let authorizeUserType = (userType) => {
         if (decoded.user_type !== userType) {
             return res.status(401).json({error: "not authorized user"});
         }
+        req.auth_user_data = {
+            user_type: decoded.user_type,
+            name: decoded.name,
+            email: decoded.email,
+        }
         next();
     }
 }
