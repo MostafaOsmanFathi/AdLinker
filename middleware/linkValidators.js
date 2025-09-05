@@ -1,7 +1,6 @@
 const {body, param, validationResult} = require("express-validator");
 
 const validate = (req, res, next) => {
-    console.log("validating link")
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
         console.log(errors)
@@ -18,8 +17,18 @@ validateFrowardLink = [
     param("linkID").isLength({min: 4}),
     validate
 ]
+validateParamLink = [
+    param("linkID").isLength({min: 4}),
+    validate
+]
+validatePutLink = [
+    param("linkID").isLength({min: 4}),
+    body("new_original_link").isURL().withMessage("must be a URL with name new_original_link"),
+    validate
+]
 validateLink = [
     body("original_link"),
+    validate
 ]
 
-module.exports = {validateCreateLink, validateFrowardLink, validateLink};
+module.exports = {validateCreateLink, validateFrowardLink, validateLink, validateParamLink, validatePutLink};

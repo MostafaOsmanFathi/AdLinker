@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const env = require('../env.js')
+const linkModel = require('../model/link.model');
 
 let userCheck = async (req, res, next) => {
     const token = req.split(' ')[1]
@@ -34,8 +35,24 @@ let authorizeUserType = (userType) => {
         }
     }
 }
+let authorizePublisherLinkParam = async (req, res, next) => {
+    try {
+        const linkID = req.params.linkID
+        const result = await linkModel.findOne({shorten_link: linkID})
+        if (!result) {
+            return res.status(401).json({error: "link not found"});
+        }
+        if (result.publisher_email !== req.auth_user_data.email) {
+            return res.status(401).json({error: "not authorized user this link is not yours"});
+        }
+        next()
+    } catch (error) {
+        console.log(error);
+        res.status(401).json({error: "not authorized user"});
+    }
 
+}
 
 module.exports = {
-    userCheck, authorizeUserType
+    userCheck, authorizeUserType,authorizePublisherLinkParam
 }

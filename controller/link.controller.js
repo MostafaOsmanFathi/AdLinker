@@ -111,6 +111,35 @@ let getLink = async (req, res) => {
         res.status(500).send({})
     }
 }
+let publisherChangeLink = async (req, res) => {
+    try {
+        const shortenLinkId = req.params.linkID
+        const new_original_link = req.body.new_original_link
+        const result = await linkModel.findOne({shorten_link: shortenLinkId})
+        if (!result) {
+            res.status(404).send({message: "link not found"})
+            return
+        }
+        result.original_link = new_original_link
+        await result.save()
+        res.status(200).json(result)
+    } catch (err) {
+        res.status(500).send({})
+    }
+}
+let publisherDeleteLink = async (req, res) => {
+    try {
+        const shortenLinkId = req.params.linkID
+        const result = await linkModel.findOneAndDelete({shorten_link: shortenLinkId})
+        if (!result) {
+            res.status(404).json({message: "link not found"})
+            return
+        }
+        res.status(404).json({message: "link deleted successfully"})
+    } catch (err) {
+        res.status(500).send({})
+    }
+}
 
 module.exports = {
     getAllLinks,
@@ -120,5 +149,7 @@ module.exports = {
     deleteAllLinks,
     createLink,
     forwardLink,
-    getLink
+    getLink,
+    publisherChangeLink,
+    publisherDeleteLink
 }
