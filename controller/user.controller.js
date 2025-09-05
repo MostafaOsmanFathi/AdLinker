@@ -1,6 +1,8 @@
 const userModel = require('../model/user.model');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const env = require('../env.js');
+
 
 let getAllUsers = async (req, res) => {
     try {
@@ -57,7 +59,7 @@ let registerUser = async (req, res) => {
 
 let loginUser = async (req, res) => {
     try {
-        const user = await userModel.findOne({email});
+        const user = await userModel.findOne({email: req.body.email});
         if (!user) {
             return res.status(400).json({error: "Email or password is incorrect"});
         }
@@ -68,7 +70,7 @@ let loginUser = async (req, res) => {
 
         const token = jwt.sign(
             {userId: user._id, email: user.email, role: user.user_type},
-            process.env.JWT_SECRET,
+            env.JWT_SECRET,
             {expiresIn: "1h"}
         );
 
