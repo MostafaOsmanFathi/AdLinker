@@ -13,8 +13,11 @@ let getAllLinks = async (req, res) => {
 
 let deleteLinkByShorten_link = async (req, res) => {
     try {
-        const result = await linkModel.find({shorten_link: req.body.shorten_link})
-        res.status(200).json(result)
+        const result = await linkModel.findOneAndDelete({shorten_link: req.body.shorten_link})
+        if (!result) {
+            return res.status(404).json({message: "Link not found"});
+        }
+        res.status(200).json({message: "Link deleted successfully"})
     } catch (err) {
         res.status(500).send({})
     }
@@ -66,6 +69,23 @@ let forwardLink = async (req, res) => {
             res.status(404).send({message: "link not found"})
             return
         }
+        result.number_of_visitors = result.number_of_visitors + 1
+        console.log(result.number_of_visitors)
+        await result.save()
+
+        res.redirect(301, result.original_link)
+    } catch (err) {
+        res.status(500).send({})
+    }
+}
+let getLink = async (req, res) => {
+    try {
+        const shortenLinkId = req.params.linkID
+        const result = await linkModel.findOne({shorten_link: shortenLinkId})
+        if (!result) {
+            res.status(404).send({message: "link not found"})
+            return
+        }
         res.status(200).json(result)
     } catch (err) {
         res.status(500).send({})
@@ -77,5 +97,6 @@ module.exports = {
     deleteLinkByShorten_link,
     deleteAllLinks,
     createLink,
-    forwardLink
+    forwardLink,
+    getLink
 }

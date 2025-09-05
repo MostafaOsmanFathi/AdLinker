@@ -1,5 +1,5 @@
 const express = require('express');
-const dbConnection = require("./data-acess/monogodbConnection.js");
+const dbConnection = require("./database/monogodbConnection.js");
 const userRouter = require("./route/user.route.js");
 const linkRouter = require("./route/link.route.js");
 

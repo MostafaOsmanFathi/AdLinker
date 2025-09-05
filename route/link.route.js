@@ -18,5 +18,6 @@ linkRoute.route('/link/createLink')
     .post(linkValidator.validateCreateLink, authorization.authorizeUserType('publisher'), linkController.createLink)
 
 linkRoute.route('/link/forward/:linkID').get(linkValidator.validateFrowardLink, linkController.forwardLink)
+linkRoute.route('/link/getLink/:linkID').get(linkValidator.validateFrowardLink, linkController.getLink)
 
 module.exports = linkRoute
