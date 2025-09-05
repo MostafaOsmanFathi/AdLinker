@@ -15,7 +15,9 @@ userRouter.route('/admin/user')
 userRouter.route('/admin/deleteAllUsers').delete(userValidation.emailValidation, authorization.authorizeUserType('admin'), userController.deleteAllUsers);
 
 //only authorized publisher
-userRouter.route('/publisher/my-links').get(authorization.authorizeUserType('publisher'), linkController.getAllPublisherLinks)
+userRouter.route('/publisher/my-links')
+    .get(authorization.authorizeUserType('publisher'), linkController.getAllPublisherLinks)
+    .delete(authorization.authorizeUserType('publisher'), linkController.deleteAllPublisherLinks);
 
 /// Unauthorized Use
 userRouter.route('/user/register').post(userValidation.registerUserValidation,

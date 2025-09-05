@@ -21,6 +21,16 @@ let getAllPublisherLinks = async (req, res) => {
     }
 }
 
+let deleteAllPublisherLinks = async (req, res) => {
+    try {
+        const result = await linkModel.deleteMany({publisher_email: req.auth_user_data.email})
+        res.status(200).json(result)
+    } catch (err) {
+        console.log(err)
+        res.status(500).send({})
+    }
+}
+
 let deleteLinkByShorten_link = async (req, res) => {
     try {
         const result = await linkModel.findOneAndDelete({shorten_link: req.body.shorten_link})
@@ -106,6 +116,7 @@ module.exports = {
     getAllLinks,
     getAllPublisherLinks,
     deleteLinkByShorten_link,
+    deleteAllPublisherLinks,
     deleteAllLinks,
     createLink,
     forwardLink,
