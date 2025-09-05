@@ -1,18 +1,17 @@
-const userModel = require('../model/user.model');
-const bcryptjs = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const env = require('../env.js');
-
+const userModel = require("../model/user.model");
+const bcryptjs = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const env = require("../env");
 
 let getAllUsers = async (req, res) => {
     try {
         let userList = await userModel.find();
-        res.status(200).json(userList)
+        res.status(200).json(userList);
     } catch (err) {
         console.log(err);
         res.status(500).json({error: "Failed to get all users"});
     }
-}
+};
 
 let deleteAllUsers = async (req, res) => {
     try {
@@ -23,25 +22,24 @@ let deleteAllUsers = async (req, res) => {
         console.error(err);
         res.status(500).json({error: "Failed to delete all users"});
     }
-}
+};
 
 let deleteUserByEmail = async (req, res) => {
     try {
         let email = req.body.email;
-        let isDeleted = await userModel.findOneAndDelete(
-            {email: email},
-        )
+        let isDeleted = await userModel.findOneAndDelete({email: email});
         if (isDeleted) {
-            res.status(200).json({message: `User with ${email} deleted successfully.`})
+            res
+                .status(200)
+                .json({message: `User with ${email} deleted successfully.`});
         } else {
-            res.status(400).json({message: `User with ${email} not found`})
+            res.status(400).json({message: `User with ${email} not found`});
         }
     } catch (err) {
         console.error(err);
         res.status(500).json({error: "Failed to delete user"});
     }
-}
-
+};
 
 let registerUser = async (req, res) => {
     try {
@@ -49,13 +47,17 @@ let registerUser = async (req, res) => {
         const {email, name, password, user_type} = req.body;
         let newUserModel = new userModel({email, name, password, user_type});
         await newUserModel.save();
-        console.log(`User with ${email} and ${name} registered successfully.`)
-        res.status(200).json({message: `User with ${email} and ${name} registered successfully.`})
+        console.log(`User with ${email} and ${name} registered successfully.`);
+        res
+            .status(200)
+            .json({
+                message: `User with ${email} and ${name} registered successfully.`,
+            });
     } catch (err) {
         console.error(err);
         res.status(500).json({error: "Failed to register user"});
     }
-}
+};
 
 let loginUser = async (req, res) => {
     try {
@@ -69,7 +71,12 @@ let loginUser = async (req, res) => {
         }
 
         const token = jwt.sign(
-            {userId: user._id, email: user.email, user_type: user.user_type, name: user.name},
+            {
+                userId: user._id,
+                email: user.email,
+                user_type: user.user_type,
+                name: user.name,
+            },
             env.JWT_SECRET,
             {expiresIn: "24h"}
         );
@@ -80,14 +87,20 @@ let loginUser = async (req, res) => {
                 id: user._id,
                 email: user.email,
                 name: user.name,
-                role: user.user_type
+                role: user.user_type,
             },
-            token
+            token,
         });
     } catch (error) {
         console.error(error);
         res.status(500).json({error: "Failed to login user"});
     }
-}
+};
 
-module.exports = {getAllUsers, deleteUserByEmail, deleteAllUsers, registerUser, loginUser}
+module.exports = {
+    getAllUsers,
+    deleteUserByEmail,
+    deleteAllUsers,
+    registerUser,
+    loginUser,
+};

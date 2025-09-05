@@ -1,34 +1,33 @@
 const {body, param, validationResult} = require("express-validator");
 
 const validate = (req, res, next) => {
-    const errors = validationResult(req)
+    const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        console.log(errors)
-        return res.status(400).json({errors: errors})
+        console.log(errors);
+        return res.status(400).json({errors: errors});
     }
-    next()
-}
+    next();
+};
 validateCreateLink = [
     body("original_link").isURL().withMessage("must be a URL"),
-    validate
-]
+    validate,
+];
 
-validateFrowardLink = [
-    param("linkID").isLength({min: 4}),
-    validate
-]
-validateParamLink = [
-    param("linkID").isLength({min: 4}),
-    validate
-]
+validateFrowardLink = [param("linkID").isLength({min: 4}), validate];
+validateParamLink = [param("linkID").isLength({min: 4}), validate];
 validatePutLink = [
     param("linkID").isLength({min: 4}),
-    body("new_original_link").isURL().withMessage("must be a URL with name new_original_link"),
-    validate
-]
-validateLink = [
-    body("original_link"),
-    validate
-]
+    body("new_original_link")
+        .isURL()
+        .withMessage("must be a URL with name new_original_link"),
+    validate,
+];
+validateLink = [body("original_link"), validate];
 
-module.exports = {validateCreateLink, validateFrowardLink, validateLink, validateParamLink, validatePutLink};
+module.exports = {
+    validateCreateLink,
+    validateFrowardLink,
+    validateLink,
+    validateParamLink,
+    validatePutLink,
+};

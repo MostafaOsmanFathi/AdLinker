@@ -1,36 +1,31 @@
 const {body, validationResult} = require("express-validator");
 
-
 const validate = (req, res, next) => {
-    const errors = validationResult(req)
+    const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({errors: errors})
+        return res.status(400).json({errors: errors});
     }
-    next()
-}
+    next();
+};
 
-const emailValidation = [
-    body("email").isEmail(),
-    validate
-]
+const emailValidation = [body("email").isEmail(), validate];
 
 const registerUserValidation = [
     body("email").isEmail(),
     body("name").isLength({min: 4}),
     body("password").isLength({min: 4}),
     body("user_type").optional().isIn(["publisher", "user", "admin"]),
-    validate
+    validate,
 ];
 
 const loginUserValidation = [
     body("email").isEmail(),
     body("password").isLength({min: 4}),
-    validate
-]
-
+    validate,
+];
 
 module.exports = {
     emailValidation,
     registerUserValidation,
     loginUserValidation,
-}
+};
