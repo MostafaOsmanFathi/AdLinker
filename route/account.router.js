@@ -3,24 +3,30 @@ const accountController = require("../controller/account.controller");
 const userValidation = require("../middleware/validators/UserValidators");
 const authorization = require("../middleware/authorization");
 
-const userRouter = express.Router();
+const accountRouter = express.Router();
 
 /// Unauthorized Use
-userRouter
+accountRouter
     .route("/register")
     .post(userValidation.registerUserValidation, accountController.registerUser);
 
-userRouter
+accountRouter
     .route("/login")
     .post(userValidation.loginUserValidation, accountController.loginUser);
 
 
-userRouter
+accountRouter
     .route("/my-account")
     .get(authorization.loggedInCheck, accountController.getMyAccountData)
     .put(userValidation.updateUserValidation, authorization.loggedInCheck, accountController.changeMyAccountData)
     .delete(authorization.loggedInCheck, accountController.deleteMyAccount)
 
-userRouter.route("/logout").post(authorization.loggedInCheck)
+accountRouter.route("/logout").post(authorization.loggedInCheck, accountController.logoutUser);
 
-module.exports = userRouter;
+
+accountRouter
+    .route("/my-visits-history")
+    .get(authorization.loggedInCheck, accountController.getAllAccountVisits)
+
+
+module.exports = accountRouter;

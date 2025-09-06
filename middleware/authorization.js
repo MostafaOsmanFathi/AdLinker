@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const env = require("../config/env");
 const linkModel = require("../model/link.model");
+const userLinkVisitHistoryModel = require("../model/userLinkVisitHistory.model");
 
 let loggedInCheck = async (req, res, next) => {
     try {
@@ -17,6 +18,21 @@ let loggedInCheck = async (req, res, next) => {
         res.status(401).json({error: "Authentication failed"});
     }
 };
+
+let recordVisitIfLoggedInAndPass = async (req, res, next) => {
+    try {
+        const token = req.headers.authorization.split(" ")[1];
+        const decoded = await jwt.verify(token, env.JWT_SECRET);
+
+        const linkID = req.params.linkID
+        const email = decoded.email;
+        const newHistoryModel = new userLinkVisitHistoryModel({email, visited_shorten_link_id: linkID})
+        await newHistoryModel.save();
+        next();
+    } catch (error) {
+        next()
+    }
+}
 
 let authorizeUserType = (userType) => {
     return async (req, res, next) => {
@@ -60,4 +76,5 @@ module.exports = {
     loggedInCheck,
     authorizeUserType,
     authorizePublisherLinkParam,
+    recordVisitIfLoggedInAndPass
 };

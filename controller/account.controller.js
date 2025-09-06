@@ -1,8 +1,8 @@
 const bcryptjs = require("bcryptjs");
 const userModel = require("../model/account.model");
+const userLinkVisitHistoryModel = require("../model/userLinkVisitHistory.model")
 const jwt = require("jsonwebtoken");
 const env = require("../config/env");
-
 
 let registerUser = async (req, res) => {
     try {
@@ -121,11 +121,23 @@ let logoutUser = async (req, res) => {
     req.status(200).json({error: "user logged out"});
 }
 
+let getAllAccountVisits = async (req, res) => {
+    try {
+        const email = req.auth_user_data.email;
+        const result = await userLinkVisitHistoryModel.find({email})
+        res.status(200).json(result)
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+    }
+}
+
 module.exports = {
     registerUser,
     loginUser,
     getMyAccountData,
     changeMyAccountData,
     deleteMyAccount,
-    logoutUser
+    logoutUser,
+    getAllAccountVisits,
 }
