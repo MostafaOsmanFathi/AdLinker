@@ -1,4 +1,3 @@
-const express = require("express");
 const linkModel = require("../model/link.model");
 const crypto = require("crypto");
 

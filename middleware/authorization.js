@@ -2,24 +2,27 @@ const jwt = require("jsonwebtoken");
 const env = require("../config/env");
 const linkModel = require("../model/link.model");
 
-let userCheck = async (req, res, next) => {
-    const token = req.headers.authorization.split(" ")[1];
-    const isAuthenticated = await jwt.verify(token, env.JWT_SECRET);
-    if (!isAuthenticated) {
+let loggedInCheck = async (req, res, next) => {
+    try {
+        const token = req.headers.authorization.split(" ")[1];
+        const decoded = await jwt.verify(token, env.JWT_SECRET);
+
+        req.auth_user_data = {
+            user_type: decoded.user_type,
+            name: decoded.name,
+            email: decoded.email,
+        };
+        next();
+    } catch (error) {
         res.status(401).json({error: "Authentication failed"});
     }
-    next();
 };
 
 let authorizeUserType = (userType) => {
     return async (req, res, next) => {
         try {
             const token = req.headers.authorization.split(" ")[1];
-            const isAuthenticated = await jwt.verify(token, env.JWT_SECRET);
-            if (!isAuthenticated) {
-                res.status(401).json({error: "Authentication failed"});
-            }
-            const decoded = jwt.decode(token, env.JWT_SECRET);
+            const decoded = jwt.verify(token, env.JWT_SECRET);
             if (decoded.user_type !== userType) {
                 return res.status(401).json({error: "not authorized user"});
             }
@@ -54,7 +57,7 @@ let authorizePublisherLinkParam = async (req, res, next) => {
 };
 
 module.exports = {
-    userCheck,
+    loggedInCheck,
     authorizeUserType,
     authorizePublisherLinkParam,
 };

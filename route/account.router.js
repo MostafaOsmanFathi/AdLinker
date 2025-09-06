@@ -1,19 +1,26 @@
 const express = require("express");
-const userController = require("../controller/user.controller");
-const linkController = require("../controller/link.controller");
+const accountController = require("../controller/account.controller");
 const userValidation = require("../middleware/validators/UserValidators");
 const authorization = require("../middleware/authorization");
-const validateLink = require("../middleware/validators/linkValidators");
 
 const userRouter = express.Router();
 
 /// Unauthorized Use
 userRouter
     .route("/register")
-    .post(userValidation.registerUserValidation, userController.registerUser);
+    .post(userValidation.registerUserValidation, accountController.registerUser);
 
 userRouter
     .route("/login")
-    .post(userValidation.loginUserValidation, userController.loginUser);
+    .post(userValidation.loginUserValidation, accountController.loginUser);
+
+
+userRouter
+    .route("/my-account")
+    .get(authorization.loggedInCheck, accountController.getMyAccountData)
+    .put(userValidation.updateUserValidation, authorization.loggedInCheck, accountController.changeMyAccountData)
+    .delete(authorization.loggedInCheck, accountController.deleteMyAccount)
+
+userRouter.route("/logout").post(authorization.loggedInCheck)
 
 module.exports = userRouter;
