@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const env = require("../env");
+const env = require("../config/env");
 const linkModel = require("../model/link.model");
 
 let userCheck = async (req, res, next) => {

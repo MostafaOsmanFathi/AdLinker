@@ -1,7 +1,7 @@
 const userModel = require("../model/user.model");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const env = require("../env");
+const env = require("../config/env");
 
 let getAllUsers = async (req, res) => {
     try {

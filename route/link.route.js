@@ -1,6 +1,6 @@
 const express = require("express");
 const authorization = require("../middleware/authorization");
-const linkValidator = require("../middleware/linkValidators");
+const linkValidator = require("../middleware/validators/linkValidators");
 const linkController = require("../controller/link.controller");
 
 const linkRoute = express.Router();

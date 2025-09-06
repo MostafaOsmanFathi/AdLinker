@@ -1,8 +1,8 @@
 const express = require("express");
 const linkController = require("../controller/link.controller");
 const authorization = require("../middleware/authorization");
-const validateLink = require("../middleware/linkValidators");
-const linkValidator = require("../middleware/linkValidators");
+const validateLink = require("../middleware/validators/linkValidators");
+const linkValidator = require("../middleware/validators/linkValidators");
 
 //only authorized publisher
 

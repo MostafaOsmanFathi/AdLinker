@@ -1,9 +1,9 @@
 const express = require("express");
 const userController = require("../controller/user.controller");
 const linkController = require("../controller/link.controller");
-const userValidation = require("../middleware/UserValidators");
+const userValidation = require("../middleware/validators/UserValidators");
 const authorization = require("../middleware/authorization");
-const validateLink = require("../middleware/linkValidators");
+const validateLink = require("../middleware/validators/linkValidators");
 
 const userRouter = express.Router();
 
