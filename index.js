@@ -1,14 +1,14 @@
 const express = require("express");
 const dbConnection = require("./database/monogodbConnection");
-const userRouter = require("./route/user.route.js");
-const linkRouter = require("./route/link.route.js");
+const userRouter = require("./route/account.router.js");
+const linkRouter = require("./route/link.router.js");
 const adminRouter = require("./route/admin.router");
 const publisherRouter = require("./route/publisher.router");
 const app = express();
 
 app.use(express.json());
 
-app.use("/user", userRouter);
+app.use("/account", userRouter);
 app.use("/admin", adminRouter);
 app.use("/link", linkRouter);
 app.use("/publisher", publisherRouter);

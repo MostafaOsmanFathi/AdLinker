@@ -3,13 +3,13 @@ const authorization = require("../middleware/authorization");
 const linkValidator = require("../middleware/validators/linkValidators");
 const linkController = require("../controller/link.controller");
 
-const linkRoute = express.Router();
+const linkRouter = express.Router();
 
-linkRoute
+linkRouter
     .route("/forward/:linkID")
     .get(linkValidator.validateFrowardLink, linkController.forwardLink);
-linkRoute
+linkRouter
     .route("/getLink/:linkID")
     .get(linkValidator.validateFrowardLink, linkController.getLink);
 
-module.exports = linkRoute;
+module.exports = linkRouter;
