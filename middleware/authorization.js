@@ -3,7 +3,7 @@ const env = require("../env");
 const linkModel = require("../model/link.model");
 
 let userCheck = async (req, res, next) => {
-    const token = req.split(" ")[1];
+    const token = req.headers.authorization.split(" ")[1];
     const isAuthenticated = await jwt.verify(token, env.JWT_SECRET);
     if (!isAuthenticated) {
         res.status(401).json({error: "Authentication failed"});
