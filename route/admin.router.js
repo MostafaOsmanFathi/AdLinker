@@ -1,5 +1,5 @@
 const express = require("express");
-const userController = require("../controller/user.controller");
+const userController = require("../controller/admin.controller");
 const linkController = require("../controller/link.controller");
 const userValidation = require("../middleware/validators/UserValidators");
 const authorization = require("../middleware/authorization");
