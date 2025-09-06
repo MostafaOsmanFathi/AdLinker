@@ -147,7 +147,7 @@ let publisherDeleteLink = async (req, res) => {
             res.status(404).json({message: "link not found"});
             return;
         }
-        res.status(404).json({message: "link deleted successfully"});
+        res.status(200).json({message: "link deleted successfully"});
     } catch (err) {
         res.status(500).send({});
     }
