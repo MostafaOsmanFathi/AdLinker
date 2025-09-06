@@ -1,10 +1,14 @@
 # URL Shortener Backend (Express + MongoDB)
 
 This project is a **backend system** built with **Node.js (Express)** and **MongoDB (Mongoose)**.
-It provides **user authentication**, **role-based access control**, and a **link shortener service** with publishers, users, and admins.
+It provides **user authentication**, **role-based access control**, and a **link shortener service** with publishers,
+users, and admins.
 
 ---
 
+#### For detailed usage of endpoints, check out the [API Guide](Api-guide.md).
+
+---
 ## 🚀 Features
 
 * **User Accounts**
@@ -106,6 +110,8 @@ It provides **user authentication**, **role-based access control**, and a **link
 ---
 
 ## 🔑 API Endpoints
+
+#### For detailed usage of endpoints, check out the [API Guide](Api-guide.md).
 
 ### Account
 
