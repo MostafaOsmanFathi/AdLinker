@@ -2,9 +2,15 @@ const bcryptjs = require("bcryptjs");
 const userModel = require("../model/account.model");
 const userLinkVisitHistoryModel = require("../model/userLinkVisitHistory.model")
 const jwt = require("jsonwebtoken");
+const jwtService = require("../security/jwtServices");
 
 let registerUser = async (req, res) => {
     try {
+        const result = await userModel.findOne({email: req.body.email})
+        if (result) {
+            return res.status(200).json({message: "User already registered"})
+        }
+
         req.body.password = await bcryptjs.hash(req.body.password, 12);
         const {email, name, password, user_type} = req.body;
         let newUserModel = new userModel({email, name, password, user_type});
@@ -40,7 +46,7 @@ let loginUser = async (req, res) => {
                 name: user.name,
             },
             process.env.JWT_SECRET,
-            {expiresIn: "24h"}
+            {expiresIn: process.env.TOKEN_EXPIRY}
         );
 
         res.status(200).json({
@@ -64,7 +70,7 @@ let getMyAccountData = async (req, res) => {
         if (!req.auth_user_data) {
             res.status(404).json({error: "User Not Found"});
         }
-        const result = await userModel.find({email: req.auth_user_data.email})
+        const result = await userModel.findOne({email: req.auth_user_data.email})
         res.status(200).json(result)
     } catch (error) {
         console.error(error);
@@ -117,7 +123,9 @@ let deleteMyAccount = async (req, res) => {
 
 let logoutUser = async (req, res) => {
     //TODO Implement jwt black list to revoke jwt token access
-    req.status(200).json({error: "user logged out"});
+    const token = req.headers.authorization.split(" ")[1];
+    jwtService.addTokenToBlackList(token)
+    res.status(200).json({message: "user logged out"});
 }
 
 let getAllAccountVisits = async (req, res) => {
