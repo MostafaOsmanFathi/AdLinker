@@ -2,7 +2,6 @@ const bcryptjs = require("bcryptjs");
 const userModel = require("../model/account.model");
 const userLinkVisitHistoryModel = require("../model/userLinkVisitHistory.model")
 const jwt = require("jsonwebtoken");
-const env = require("../config/env");
 
 let registerUser = async (req, res) => {
     try {
@@ -40,7 +39,7 @@ let loginUser = async (req, res) => {
                 user_type: user.user_type,
                 name: user.name,
             },
-            env.JWT_SECRET,
+            process.env.JWT_SECRET,
             {expiresIn: "24h"}
         );
 

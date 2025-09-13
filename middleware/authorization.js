@@ -6,7 +6,7 @@ const userLinkVisitHistoryModel = require("../model/userLinkVisitHistory.model")
 let loggedInCheck = async (req, res, next) => {
     try {
         const token = req.headers.authorization.split(" ")[1];
-        const decoded = await jwt.verify(token, env.JWT_SECRET);
+        const decoded = await jwt.verify(token, process.env.JWT_SECRET);
 
         req.auth_user_data = {
             user_type: decoded.user_type,
@@ -22,7 +22,7 @@ let loggedInCheck = async (req, res, next) => {
 let recordVisitIfLoggedInAndPass = async (req, res, next) => {
     try {
         const token = req.headers.authorization.split(" ")[1];
-        const decoded = await jwt.verify(token, env.JWT_SECRET);
+        const decoded = await jwt.verify(token, process.env.JWT_SECRET);
 
         const linkID = req.params.linkID
         const email = decoded.email;
@@ -38,7 +38,7 @@ let authorizeUserType = (userType) => {
     return async (req, res, next) => {
         try {
             const token = req.headers.authorization.split(" ")[1];
-            const decoded = jwt.verify(token, env.JWT_SECRET);
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
             if (decoded.user_type !== userType) {
                 return res.status(401).json({error: "not authorized user"});
             }
