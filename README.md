@@ -6,7 +6,7 @@ users, and admins.
 
 ---
 
-#### For detailed usage of endpoints, check out the [API Guide](Api-guide.md).
+#### For detailed usage of endpoints, check out the [API Guide](/Api-Guide.md).
 
 ---
 ## 🚀 Features
@@ -111,7 +111,7 @@ users, and admins.
 
 ## 🔑 API Endpoints
 
-#### For detailed usage of endpoints, check out the [API Guide](Api-guide.md).
+#### For detailed usage of endpoints, check out the [API Guide](/Api-Guide.md).
 
 ### Account
 
