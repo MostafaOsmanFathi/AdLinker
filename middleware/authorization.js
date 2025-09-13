@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const env = require("../config/env");
 const linkModel = require("../model/link.model");
 const userLinkVisitHistoryModel = require("../model/userLinkVisitHistory.model");
 

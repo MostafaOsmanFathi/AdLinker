@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const dbConnection = require("./database/monogodbConnection");
 const userRouter = require("./route/account.router.js");
