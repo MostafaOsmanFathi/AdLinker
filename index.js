@@ -14,6 +14,9 @@ app.use("/admin", adminRouter);
 app.use("/link", linkRouter);
 app.use("/publisher", publisherRouter);
 
-app.listen(3333, () => {
-    console.log(`Server started at http://localhost:3333/`);
+app.use((req, res, next) => {
+    res.send("<h1> UnSupported Route </h1>");
+});
+app.listen(process.env.PORT, process.env.HOST_NAME, () => {
+    console.log(`Server started at http://${process.env.HOST_NAME}:${process.env.PORT}/`);
 });
