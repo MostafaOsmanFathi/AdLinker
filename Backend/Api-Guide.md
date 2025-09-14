@@ -31,7 +31,7 @@ You get this token when logging in.
   "name": "Mostafa Osman",
   "email": "mostafa@example.com",
   "password": "mypassword",
-  "user_type": "user"  // can be "user" or "publisher"
+  "user_type": "user"  // can be "user" or "publisher" or "admin"
 }
 ```
 
