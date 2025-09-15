@@ -6,6 +6,9 @@ import {Home} from './home/home';
 import {PublisherHome} from './publisher/publisher-home/publisher-home';
 import {MyLinks} from './publisher/my-links/my-links';
 import {CreateLink} from './publisher/create-link/create-link';
+import {Profile} from './profile/profile';
+import {DeleteMyAccount} from './profile/delete-my-account/delete-my-account';
+import {VisitHistory} from './profile/visit-history/visit-history';
 
 export const routes: Routes = [
   {
@@ -25,10 +28,23 @@ export const routes: Routes = [
       {
         path: 'rest-password',
         component: ResetPassowrd
+      },
+    ]
+  }, {
+    path: 'profile',
+    component: Profile,
+    children: [
+      {
+        path: 'visit-history',
+        component: VisitHistory
+
+      },
+      {
+        path: 'delete-my-account',
+        component: DeleteMyAccount
       }
     ]
-  },
-  {
+  }, {
     path: 'publisher',
     component: PublisherHome,
     children: [
