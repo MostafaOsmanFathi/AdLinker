@@ -1,30 +1,28 @@
 <div class="container my-5">
   <h1 class="text-center mb-5 text-white fw-bold">Publisher Dashboard</h1>
 
-  <div class="row g-4">
-
-    <div class="col-md-4">
-      <div class="action-box p-4 text-center">
-        <h4 class="fw-bold mb-4 text-black">Quick Actions</h4>
-
-        <button routerLink="my-links" class="btn btn-primary w-100 mb-3">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-12 col-md-3 mb-4 mb-md-0">
+      <div class="list-group shadow-sm" style="background-color: #f8faff; border-radius: 8px;">
+        <a routerLink="my-links" routerLinkActive="active-link"
+           class="list-group-item list-group-item-action">
           View My Links
-        </button>
-
-        <button routerLink="add-link" class="btn btn-success w-100">
+        </a>
+        <a routerLink="add-link" routerLinkActive="active-link"
+           class="list-group-item list-group-item-action">
           Create New Link
-        </button>
+        </a>
       </div>
     </div>
 
-    <div class="col-md-8">
-      <div class="content-box p-4">
-        <h4 class="fw-bold mb-5 text-black">Publisher Link Service</h4>
-
-        <router-outlet></router-outlet>
-
+    <!-- Content Area -->
+    <div class="col-12 col-md-9">
+      <div class="card shadow-sm border-0" style="background-color: #f8faff;">
+        <div class="card-body">
+          <router-outlet></router-outlet>
+        </div>
       </div>
     </div>
   </div>
 </div>
-

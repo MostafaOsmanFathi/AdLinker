@@ -21,22 +21,24 @@
     <!-- Navbar links -->
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav align-items-center">
-        @if (loggedIn) {
-          <li class="nav-item d-flex">
-            <a class="nav-link px-3" routerLink="/account/logout" routerLinkActive="active-link">Logout</a>
-          </li>
-          <li class="nav-item d-flex">
-
-            <a class="nav-link px-3" routerLink="/account/profile" routerLinkActive="active-link">Profile</a>
-          </li>
-        } @else {
-          <li class="nav-item">
-            <a class="nav-link px-3" routerLink="/account/login" routerLinkActive="active-link">login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link px-3" routerLink="/account/register" routerLinkActive="active-link">register</a>
-          </li>
-        }
+        <!--        @if (loggedIn) {-->
+        <li class="nav-item d-flex">
+          <a class="nav-link px-3" routerLink="/account/logout" routerLinkActive="active-link">Logout</a>
+        </li>
+        <li class="nav-item d-flex">
+          <a class="nav-link px-3" routerLink="/profile" routerLinkActive="active-link">Profile</a>
+        </li>
+        <li class="nav-item d-flex">
+          <a class="nav-link px-3" routerLink="/publisher" routerLinkActive="active-link">Publisher</a>
+        </li>
+        <!--        } @else {-->
+        <li class="nav-item">
+          <a class="nav-link px-3" routerLink="/account/login" routerLinkActive="active-link">login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3" routerLink="/account/register" routerLinkActive="active-link">register</a>
+        </li>
+        <!--        }-->
       </ul>
     </div>
   </div>

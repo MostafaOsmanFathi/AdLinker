@@ -17,3 +17,20 @@
   min-height: 300px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
+
+.list-group-item {
+  border: none;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.list-group-item:hover {
+  background-color: rgba(75, 108, 183, 0.1); /* soft blue hover */
+}
+
+.active-link {
+  font-weight: bold;
+  color: #4b6cb7 !important;
+  border-left: 4px solid #4b6cb7;
+  background-color: rgba(75, 108, 183, 0.1);
+}
