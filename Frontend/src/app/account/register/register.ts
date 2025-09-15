@@ -1,5 +1,12 @@
 import {Component} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators
+} from "@angular/forms";
 import {RouterLink} from '@angular/router';
 
 @Component({
@@ -23,8 +30,20 @@ export class Register {
         password: ['', [Validators.required, Validators.pattern(this.PASSWORD_REGEX)]],
         passwordAgain: ['', Validators.required],
         userType: ['', [Validators.pattern(/^(user|admin|publisher)$/), Validators.required]]
+      }, {
+        validators: [this.passwordMatchValidator]
       }
     )
+  }
+
+  passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
+    const password = control.value['password'];
+    const passwordAgain = control.value["passwordAgain"];
+
+    if (password && passwordAgain && password !== passwordAgain) {
+      return {passwordMismatch: true};
+    }
+    return null; // valid
   }
 
   get formControl() {
@@ -33,6 +52,8 @@ export class Register {
 
   onSubmit() {
     this.submitted = true;
+    console.log(this.registerForm);
+    console.log("is valid", this.registerForm.valid);
     if (this.registerForm.valid) {
       alert("form valid")
     }

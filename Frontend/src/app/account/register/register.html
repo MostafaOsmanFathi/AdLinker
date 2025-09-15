@@ -66,10 +66,12 @@
       <div class="mb-3">
         <label for="password Again" class="form-label">Confirm Password</label>
         <input type="password" id="password-again" formControlName="passwordAgain" class="form-control">
-        @if (formControl['passwordAgain'].invalid && (formControl['passwordAgain'].touched || submitted)) {
+        @if ((formControl['passwordAgain'].invalid || registerForm.errors && registerForm.errors['passwordMismatch'] != null)
+        && (formControl['passwordAgain'].touched || submitted)) {
           @if (formControl['passwordAgain'].errors && formControl['passwordAgain'].errors['required']) {
             <div class="form-text text-danger"> password confirm required</div>
-          } @else if (registerForm.value['password'] !==  registerForm.value['passwordAgain']) {
+          }
+          @if (registerForm.errors && registerForm.errors['passwordMismatch'] != null) {
             <div class="form-text text-danger"> password confirm must match password</div>
           }
         }

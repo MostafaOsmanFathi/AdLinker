@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {NgClass} from '@angular/common';
 import {RouterLink} from '@angular/router';
 
 @Component({
@@ -8,7 +7,6 @@ import {RouterLink} from '@angular/router';
   templateUrl: './login.html',
   imports: [
     ReactiveFormsModule,
-    NgClass,
     RouterLink
   ],
   styleUrls: ['./login.css']
