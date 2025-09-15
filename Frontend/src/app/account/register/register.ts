@@ -12,27 +12,29 @@ import {RouterLink} from '@angular/router';
   styleUrl: './register.css'
 })
 export class Register {
+  private PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
   registerForm: FormGroup;
+  submitted: boolean = false;
 
   constructor(private fb: FormBuilder) {
     this.registerForm = fb.group({
         email: ['', [Validators.required, Validators.email]],
-        name: ['', Validators.required],
-        password: ['', Validators.required],
+        name: ['', [Validators.required, Validators.minLength(4)]],
+        password: ['', [Validators.required, Validators.pattern(this.PASSWORD_REGEX)]],
         passwordAgain: ['', Validators.required],
-        userType: ['', Validators.required]
-      }, {validators: this.passwordsMatch}
+        userType: ['', [Validators.pattern(/^(user|admin|publisher)$/), Validators.required]]
+      }
     )
   }
 
-  passwordsMatch(group: AbstractControl) {
-    const password = group.get('password')?.value;
-    const passwordAgain = group.get('passwordAgain')?.value;
-
-    return password === passwordAgain ? null : {passwordsMismatch: true};
+  get formControl() {
+    return this.registerForm.controls;
   }
 
   onSubmit() {
-
+    this.submitted = true;
+    if (this.registerForm.valid) {
+      alert("form valid")
+    }
   }
 }

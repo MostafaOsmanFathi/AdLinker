@@ -5,39 +5,80 @@
       <div class="mb-3">
         <label for="email" class="form-label">Email address</label>
         <input type="email" id="email" formControlName="email" class="form-control">
+        @if (formControl['email'].invalid && (formControl['email'].touched || submitted)) {
+
+          @if (formControl['email'].errors && formControl['email'].errors['required']) {
+            <div class="form-text text-danger"> this filed is required</div>
+          }
+          @if (formControl['email'].errors && formControl['email'].errors['email']) {
+            <div class="form-text text-danger"> Not valid email</div>
+          }
+        }
       </div>
 
       <div class="mb-3">
         <label for="name" class="form-label"> Name </label>
         <input type="text" id="name" formControlName="name" class="form-control">
+        @if (formControl['name'].invalid && (formControl['name'].touched || submitted)) {
+
+          @if (formControl['name'].errors && formControl['name'].errors['required']) {
+            <div class="form-text text-danger"> this filed is required</div>
+          }
+          @if (formControl['name'].errors && formControl['name'].errors['minlength']) {
+            <div class="form-text text-danger"> min length is 4</div>
+          }
+        }
       </div>
 
 
       <div class="mb-3">
         <label for="userType" class="form-label">User Type</label>
         <select id="userType" formControlName="userType" class="form-select">
-          <option value="user" selected>User</option>
+          <option value="user" selected disabled>select user Type ...</option>
+          <option value="user">User</option>
           <option value="publisher">Publisher</option>
           <option value="admin">Admin</option>
         </select>
+        @if (formControl['userType'].errors && (formControl['userType'].touched || submitted)) {
+          <div class="form-text text-danger"> select user type</div>
+        }
       </div>
-
 
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
         <input type="password" id="password" formControlName="password" class="form-control">
+
+        @if (formControl['password'].invalid && (formControl['password'].touched || submitted)) {
+
+          @if (formControl['password'].errors && formControl['password'].errors['required']) {
+            <div class="form-text text-danger"> password required</div>
+          }
+          @if (formControl['password'].errors && formControl['password'].errors['pattern']) {
+            <div class="form-text text-danger"> Password must be at least 8 characters, include uppercase, lowercase,
+              number, and special character.
+            </div>
+          }
+
+        }
+
       </div>
 
       <div class="mb-3">
         <label for="password Again" class="form-label">Confirm Password</label>
         <input type="password" id="password-again" formControlName="passwordAgain" class="form-control">
+        @if (formControl['passwordAgain'].invalid && (formControl['passwordAgain'].touched || submitted)) {
+          @if (formControl['passwordAgain'].errors && formControl['passwordAgain'].errors['required']) {
+            <div class="form-text text-danger"> password confirm required</div>
+          } @else if (registerForm.value['password'] !==  registerForm.value['passwordAgain']) {
+            <div class="form-text text-danger"> password confirm must match password</div>
+          }
+        }
+
       </div>
-
+      <button type="submit" class="btn btn-primary w-100">Register</button>
     </form>
-    <button type="submit" class="btn btn-primary w-100">Register</button>
-
     <div class="text-center mt-3">
-      <a routerLink="/account/login">you all ready have password</a>
+      <a routerLink="/account/login">you all ready have Account</a>
     </div>
   </div>
 </div>

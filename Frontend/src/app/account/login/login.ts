@@ -14,25 +14,25 @@ import {RouterLink} from '@angular/router';
   styleUrls: ['./login.css']
 })
 export class Login {
+  private PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
   loginForm: FormGroup;
-  submitted = false;
+  submitted: boolean = false;
 
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', [Validators.required, Validators.pattern(this.PASSWORD_REGEX)]]
     });
   }
 
-  get f() {
+  get formControl() {
     return this.loginForm.controls;
   }
 
   onSubmit(): void {
     this.submitted = true;
     if (this.loginForm.valid) {
-      console.log('Form Submitted!', this.loginForm.value);
-      // Handle login logic here
+      console.log('Form Submitted!', JSON.stringify(this.loginForm.value));
     }
   }
 }

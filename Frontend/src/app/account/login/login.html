@@ -6,14 +6,36 @@
       <div class="mb-3">
         <label for="email" class="form-label">Email address</label>
         <input type="email" id="email" formControlName="email" class="form-control">
+        @if (formControl['email'].invalid && (formControl['email'].touched || submitted)) {
+
+          @if (formControl['email'].errors && formControl['email'].errors['required']) {
+            <div class="form-text text-danger"> this filed is required</div>
+          }
+          @if (formControl['email'].errors && formControl['email'].errors['email']) {
+            <div class="form-text text-danger"> Not valid email</div>
+          }
+        }
       </div>
+
 
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
         <input type="password" id="password" formControlName="password" class="form-control">
 
-      </div>
+        @if (formControl['password'].invalid && (formControl['password'].touched || submitted)) {
 
+          @if (formControl['password'].errors && formControl['password'].errors['required']) {
+            <div class="form-text text-danger"> password required</div>
+          }
+          @if (formControl['password'].errors && formControl['password'].errors['pattern']) {
+            <div class="form-text text-danger"> Password must be at least 8 characters, include uppercase, lowercase,
+              number, and special character.
+            </div>
+          }
+
+        }
+
+      </div>
       <button type="submit" class="btn btn-primary w-100">Login</button>
     </form>
 
