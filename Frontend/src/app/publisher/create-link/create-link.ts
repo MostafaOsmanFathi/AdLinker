@@ -11,6 +11,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 })
 export class CreateLink {
   addLinkForm: FormGroup;
+  shortenResult: any = null;
   submitted: boolean = false;
   loading: boolean = false;
 
@@ -32,9 +33,13 @@ export class CreateLink {
     if (this.addLinkForm.invalid) return;
     this.loading = true;
 
-    setTimeout(() => {
-      //TODO make request
+    //TODO make request
 
+    setTimeout(() => {
+      this.shortenResult = {
+        original_link: this.addLinkForm.value['original_link'],
+        shorten_link: this.addLinkForm.value['original_link'],
+      }
       this.loading = false;
       this.addLinkForm.reset();
       this.submitted = false;
