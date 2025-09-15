@@ -1,0 +1,32 @@
+<div class="container my-5 d-flex justify-content-center">
+<div class="card shadow p-4" style="width: 100%; max-width: 500px;">
+    <h3 class="card-title text-center mb-4">Add New Link</h3>
+
+    <form [formGroup]="addLinkForm" (ngSubmit)="onSubmit()">
+      <!-- Original Link -->
+      <div class="mb-3">
+        <label for="original_link" class="form-label">Original Link</label>
+        <input type="url" id="original_link" formControlName="original_link" class="form-control"
+               placeholder="https://example.com">
+
+        @if (formControl['original_link'].invalid && (formControl['original_link'].touched || submitted)) {
+          @if (formControl['original_link'].errors && formControl['original_link'].errors['required']) {
+            <div class="form-text text-danger">This field is required</div>
+          }
+          @if (formControl['original_link'].errors && formControl['original_link'].errors['pattern']) {
+            <div class="form-text text-danger">Enter a valid URL</div>
+          }
+        }
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary w-100" [disabled]="loading || addLinkForm.invalid">
+        @if (loading) {
+          <span class="spinner-border spinner-border-sm me-2"></span> Adding...
+        } @else {
+          Add Link
+        }
+      </button>
+    </form>
+  </div>
+</div>

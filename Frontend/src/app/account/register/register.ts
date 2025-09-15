@@ -54,8 +54,9 @@ export class Register {
     this.submitted = true;
     console.log(this.registerForm);
     console.log("is valid", this.registerForm.valid);
-    if (this.registerForm.valid) {
-      alert("form valid")
+    if (this.registerForm.invalid) {
+      return
     }
+    //TODO make register request
   }
 }

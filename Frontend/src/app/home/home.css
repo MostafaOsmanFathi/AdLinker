@@ -1,0 +1,15 @@
+/* Give hero card a stronger background */
+.hero-card {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  color: #fff; /* ensure readability */
+}
+
+/* Feature cards with light blue glass effect */
+.feature-card {
+  background: rgba(75, 108, 183, 0.2); /* bluish tint */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  color: #e3e8ff; /* soft light text */
+}

@@ -1,0 +1,13 @@
+.active-link {
+  color: #4fd1f9; /* bright cyan-blue */
+  font-weight: 600; /* slightly bolder */
+  text-shadow: 0 0 5px rgba(79, 209, 249, 0.7); /* subtle glowing effect */
+  border-bottom: 2px solid #4fd1f9; /* underline accent */
+  transition: all 0.3s ease; /* smooth hover/activation */
+}
+
+.active-link:hover {
+  color: #7dd3fc; /* lighter cyan on hover */
+  text-shadow: 0 0 8px rgba(125, 211, 252, 0.9); /* stronger glow on hover */
+  border-bottom-color: #7dd3fc; /* match underline on hover */
+}

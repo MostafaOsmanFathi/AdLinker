@@ -7,16 +7,6 @@ html, body {
   /* Gradient background */
   background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
 
-  /* Optional animated gradient */
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
-}
-
-/* Optional: smooth animated gradient */
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
 }
 
 /* Optional dark overlay for better readability */

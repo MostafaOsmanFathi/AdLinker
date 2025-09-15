@@ -29,8 +29,8 @@ export class Login {
 
   onSubmit(): void {
     this.submitted = true;
-    if (this.loginForm.valid) {
-      console.log('Form Submitted!', JSON.stringify(this.loginForm.value));
-    }
+    if (this.loginForm.invalid) {return}
+
+    //TODO make login request
   }
 }
