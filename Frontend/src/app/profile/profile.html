@@ -1,1 +1,34 @@
-<p>profile works!</p>
+<div class="container my-5">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-12 col-md-3 mb-4 mb-md-0">
+      <div class="list-group shadow-sm" style="background-color: #f8faff; border-radius: 8px;">
+        <a routerLink="details" routerLinkActive="active-link"
+           class="list-group-item list-group-item-action">
+          Profile Details
+        </a>
+        <a routerLink="update-profile" routerLinkActive="active-link"
+           class="list-group-item list-group-item-action">
+          Update Profile
+        </a>
+        <a routerLink="visit-history" routerLinkActive="active-link"
+           class="list-group-item list-group-item-action">
+          Visit History
+        </a>
+        <a routerLink="delete-my-account" routerLinkActive="active-link"
+           class="list-group-item list-group-item-action text-danger">
+          Delete My Account
+        </a>
+      </div>
+    </div>
+
+    <!-- Content area -->
+    <div class="col-12 col-md-9">
+      <div class="card shadow-sm border-0" style="background-color: #f8faff;">
+        <div class="card-body">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

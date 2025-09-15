@@ -9,6 +9,8 @@ import {CreateLink} from './publisher/create-link/create-link';
 import {Profile} from './profile/profile';
 import {DeleteMyAccount} from './profile/delete-my-account/delete-my-account';
 import {VisitHistory} from './profile/visit-history/visit-history';
+import {UpdateProfile} from './profile/update-profile/update-profile';
+import {ProfileDetails} from './profile/profile-details/profile-details';
 
 export const routes: Routes = [
   {
@@ -35,6 +37,13 @@ export const routes: Routes = [
     component: Profile,
     children: [
       {
+        path: 'details',
+        component: ProfileDetails,
+      },
+      {
+        path: 'update-profile',
+        component: UpdateProfile
+      }, {
         path: 'visit-history',
         component: VisitHistory
 
