@@ -5,7 +5,16 @@ const userRouter = require("./route/account.router.js");
 const linkRouter = require("./route/link.router.js");
 const adminRouter = require("./route/admin.router");
 const publisherRouter = require("./route/publisher.router");
+const cors = require("cors");
+
+
 const app = express();
+
+app.use(cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 app.use(express.json());
 
