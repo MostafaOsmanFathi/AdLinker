@@ -54,6 +54,8 @@ export class Login {
           if (response.token && response.user) {
             localStorage.setItem("jwt_token", response.token);
             localStorage.setItem("user_data", JSON.stringify(response.user));
+            this.accountService.setJwtToken = response.token;
+            this.accountService.setUserObject = response.user;
           } else {
             throw new Error("Login Failed");
           }
