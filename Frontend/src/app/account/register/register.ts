@@ -80,7 +80,7 @@ export class Register {
           () => {
             this.router.navigate(['/account/login']);
           },
-          4000
+          2000
         )
       },
       (error) => {
