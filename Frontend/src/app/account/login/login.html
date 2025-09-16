@@ -36,7 +36,18 @@
         }
 
       </div>
-      <button type="submit" class="btn btn-primary w-100">Login</button>
+      <button type="submit" class="btn btn-primary w-100" [disabled]="loading || loginForm.invalid">
+        @if (loading) {
+          <span class="spinner-border spinner-border-sm me-2"></span> logging in ...
+        } @else {
+          login
+        }
+      </button>
+      @if (errorMessage != "") {
+        <div class="form-text text-danger"> {{ errorMessage }}</div>
+      } @else if (successMessage != "") {
+        <div class="form-text text-success"> {{ successMessage }}</div>
+      }
     </form>
 
     <div class="text-center mt-3">

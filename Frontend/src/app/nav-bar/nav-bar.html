@@ -23,7 +23,7 @@
       <ul class="navbar-nav align-items-center">
         <!--        @if (loggedIn) {-->
         <li class="nav-item d-flex">
-          <a class="nav-link px-3" routerLink="/account/logout" routerLinkActive="active-link">Logout</a>
+          <a class="nav-link px-3" routerLink="/account/logout" routerLinkActive="active-link" (click)="logout()">Logout</a>
         </li>
         <li class="nav-item d-flex">
           <a class="nav-link px-3" routerLink="/profile" routerLinkActive="active-link">Profile</a>

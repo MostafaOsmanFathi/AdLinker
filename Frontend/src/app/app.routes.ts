@@ -11,6 +11,7 @@ import {DeleteMyAccount} from './profile/delete-my-account/delete-my-account';
 import {VisitHistory} from './profile/visit-history/visit-history';
 import {UpdateProfile} from './profile/update-profile/update-profile';
 import {ProfileDetails} from './profile/profile-details/profile-details';
+import {publisherGuardGuard} from './guards/publisher-guard-guard';
 
 export const routes: Routes = [
   {
@@ -56,6 +57,7 @@ export const routes: Routes = [
   }, {
     path: 'publisher',
     component: PublisherHome,
+    canActivate:[publisherGuardGuard],
     children: [
       {
         path: 'my-links',
