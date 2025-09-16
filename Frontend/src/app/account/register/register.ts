@@ -8,6 +8,9 @@ import {
   Validators
 } from "@angular/forms";
 import {RouterLink} from '@angular/router';
+import {AccountService} from '../../services/account-service';
+import {Account} from '../../intrefaces/acccount';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -22,8 +25,11 @@ export class Register {
   private PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
   registerForm: FormGroup;
   submitted: boolean = false;
+  loading: boolean = false;
+  errorMessage: string = ""
+  successMessage: string = "";
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private accountService: AccountService, private router: Router) {
     this.registerForm = fb.group({
         email: ['', [Validators.required, Validators.email]],
         name: ['', [Validators.required, Validators.minLength(4)]],
@@ -43,12 +49,13 @@ export class Register {
     if (password && passwordAgain && password !== passwordAgain) {
       return {passwordMismatch: true};
     }
-    return null; // valid
+    return null;
   }
 
   get formControl() {
     return this.registerForm.controls;
   }
+
 
   onSubmit() {
     this.submitted = true;
@@ -57,6 +64,29 @@ export class Register {
     if (this.registerForm.invalid) {
       return
     }
-    //TODO make register request
+    const account: Account = {
+      name: this.registerForm.value['name'],
+      email: this.registerForm.value['email'],
+      password: this.registerForm.value['password'],
+      user_type: this.registerForm.value['userType'],
+    };
+    this.errorMessage = "";
+    this.successMessage = "";
+    this.loading = true;
+    this.accountService.registerUser(account).subscribe((response) => {
+        this.loading = false;
+        this.successMessage = "Registration successful! Redirecting to login...";
+        setTimeout(
+          () => {
+            this.router.navigate(['/account/login']);
+          },
+          4000
+        )
+      },
+      (error) => {
+        this.loading = false;
+        this.errorMessage = error.message
+      }
+    );
   }
 }

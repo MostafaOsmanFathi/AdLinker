@@ -66,7 +66,8 @@
       <div class="mb-3">
         <label for="password Again" class="form-label">Confirm Password</label>
         <input type="password" id="password-again" formControlName="passwordAgain" class="form-control">
-        @if ((formControl['passwordAgain'].invalid || registerForm.errors && registerForm.errors['passwordMismatch'] != null)
+        @if ((formControl['passwordAgain'].invalid || registerForm.errors && registerForm.errors['passwordMismatch'] !=
+          null)
         && (formControl['passwordAgain'].touched || submitted)) {
           @if (formControl['passwordAgain'].errors && formControl['passwordAgain'].errors['required']) {
             <div class="form-text text-danger"> password confirm required</div>
@@ -77,7 +78,18 @@
         }
 
       </div>
-      <button type="submit" class="btn btn-primary w-100">Register</button>
+      <button type="submit" class="btn btn-primary w-100" [disabled]="loading || registerForm.invalid">
+        @if (loading) {
+          <span class="spinner-border spinner-border-sm me-2"></span> Registering ...
+        } @else {
+          Register
+        }
+      </button>
+      @if (errorMessage != "") {
+        <div class="form-text text-danger"> {{ errorMessage }}</div>
+      } @else if (successMessage != "") {
+        <div class="form-text text-success"> {{ successMessage }}</div>
+      }
     </form>
     <div class="text-center mt-3">
       <a routerLink="/account/login">you all ready have Account</a>
