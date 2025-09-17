@@ -48,7 +48,6 @@ export class Login {
             {
                 next: (response: any) => {
                     this.loading = false;
-                    console.log(response);
                     this.successMessage = "logging in  successful! Redirecting to home...";
 
                     if (response.token && response.user) {
