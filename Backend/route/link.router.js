@@ -7,6 +7,11 @@ const linkRouter = express.Router();
 linkRouter
     .route("/forward/:linkID")
     .get(linkValidator.validateFrowardLink, authorization.recordVisitIfLoggedInAndPass, linkController.forwardLink);
+
+linkRouter
+    .route("/get-forward/:linkID")
+    .get(linkValidator.validateFrowardLink, authorization.recordVisitIfLoggedInAndPass, linkController.getforwardLink);
+
 linkRouter
     .route("/getLink/:linkID")
     .get(linkValidator.validateFrowardLink, linkController.getLink);

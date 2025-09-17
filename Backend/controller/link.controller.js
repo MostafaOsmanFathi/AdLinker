@@ -107,6 +107,23 @@ let forwardLink = async (req, res) => {
         res.status(500).send({});
     }
 };
+let getforwardLink = async (req, res) => {
+    try {
+        const shortenLinkId = req.params.linkID;
+        const result = await linkModel.findOne({shorten_link: shortenLinkId});
+        if (!result) {
+            res.status(404).send({message: "link not found"});
+            return;
+        }
+        result.number_of_visitors = result.number_of_visitors + 1;
+        console.log(result.number_of_visitors);
+        await result.save();
+
+        res.status(200).json({original_link: result.original_link})
+    } catch (err) {
+        res.status(500).send({});
+    }
+};
 let getLink = async (req, res) => {
     try {
         const shortenLinkId = req.params.linkID;
@@ -163,4 +180,5 @@ module.exports = {
     getLink,
     publisherChangeLink,
     publisherDeleteLink,
+    getforwardLink
 };
