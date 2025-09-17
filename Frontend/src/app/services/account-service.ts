@@ -90,7 +90,14 @@ export class AccountService {
 
     deleteMyAccount() {
         const header = this.getAuthHeader();
-        return this.http.delete(this.baseUrl + "/account/my-account", {headers: header})
+        return this.http.delete(this.baseUrl + "/account/my-account", {headers: header}).pipe(
+            finalize(() => {
+                localStorage.removeItem("jwt_token");
+                localStorage.removeItem("user_data");
+                this.clearObserveData();
+                this.router.navigate(['/']);
+            })
+        )
     }
 
     upDateAccountData(updatedData: any) {
