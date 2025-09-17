@@ -1,53 +1,54 @@
 <div class="container my-5 d-flex justify-content-center">
-  <div class="card shadow p-4" style="width: 100%; max-width: 500px;">
-    <h3 class="card-title text-center mb-4">Add New Link</h3>
+    <div class="card shadow p-4" style="width: 100%; max-width: 500px;">
+        <h3 class="card-title text-center mb-4">Add New Link</h3>
 
-    <!-- Add Link Form -->
-    <form [formGroup]="addLinkForm" (ngSubmit)="onSubmit()">
-      <div class="mb-3">
-        <label for="original_link" class="form-label">Original Link</label>
-        <input type="url" id="original_link" formControlName="original_link" class="form-control"
-               placeholder="https://example.com">
+        <!-- Add Link Form -->
+        <form [formGroup]="addLinkForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <label for="original_link" class="form-label">Original Link</label>
+                <input type="url" id="original_link" formControlName="original_link" class="form-control"
+                       placeholder="https://example.com">
 
-        @if (formControl['original_link'].invalid && (formControl['original_link'].touched || submitted)) {
-          @if (formControl['original_link'].errors && formControl['original_link'].errors['required']) {
-            <div class="form-text text-danger">This field is required</div>
-          }
-          @if (formControl['original_link'].errors && formControl['original_link'].errors['pattern']) {
-            <div class="form-text text-danger">Enter a valid URL</div>
-          }
-        }
-      </div>
+                @if (formControl['original_link'].invalid && (formControl['original_link'].touched || submitted)) {
+                    @if (formControl['original_link'].errors && formControl['original_link'].errors['required']) {
+                        <div class="form-text text-danger">This field is required</div>
+                    }
+                    @if (formControl['original_link'].errors && formControl['original_link'].errors['pattern']) {
+                        <div class="form-text text-danger">Enter a valid URL</div>
+                    }
+                }
+            </div>
 
-      <button type="submit" class="btn btn-primary w-100" [disabled]="loading || addLinkForm.invalid">
-        @if (loading) {
-          <span class="spinner-border spinner-border-sm me-2"></span> Adding...
+            <button type="submit" class="btn btn-primary w-100" [disabled]="loading || addLinkForm.invalid">
+                @if (loading) {
+                    <span class="spinner-border spinner-border-sm me-2"></span> Adding...
+                } @else {
+                    Add Link
+                }
+            </button>
+        </form>
+
+        <!-- Shorten Link Result -->
+        @if (submittedBefore && !errorMessage) {
+            <div class="mt-4 p-3 rounded" style="background-color: #f0f8ff; border: 1px solid #cce7ff;">
+                <h5 class="mb-3 text-center">Shortened Link Created 🎉</h5>
+
+                <p><strong>Shorten ID:</strong> {{ shortenResult.shorten_link }}</p>
+                <p><strong>Short Link:</strong>
+                    <a [href]="fullUrl"
+                       target="_blank">{{ fullUrl }}</a>
+                </p>
+                <p><strong>Original Link:</strong>
+                    <a [href]="shortenResult.original_link" target="_blank">{{ shortenResult.original_link }}</a>
+                </p>
+
+                <div class="text-center mt-3">
+                </div>
+            </div>
         } @else {
-          Add Link
+            <div class="text-danger">
+                {{ errorMessage }}
+            </div>
         }
-      </button>
-    </form>
-
-    <!-- Shorten Link Result -->
-    @if (shortenResult) {
-      <div class="mt-4 p-3 rounded" style="background-color: #f0f8ff; border: 1px solid #cce7ff;">
-        <h5 class="mb-3 text-center">Shortened Link Created 🎉</h5>
-
-        <p><strong>Shorten ID:</strong> {{ shortenResult.shorten_link }}</p>
-        <p><strong>Short Link:</strong>
-          <a [href]="shortenResult.shorten_link" target="_blank">{{ shortenResult.shorten_link }}</a>
-        </p>
-        <p><strong>Original Link:</strong>
-          <a [href]="shortenResult.original_link" target="_blank">{{ shortenResult.original_link }}</a>
-        </p>
-
-        <div class="text-center mt-3">
-          //(click)="viewDetails(shortenResult.shorten_link)"
-          <button class="btn btn-outline-primary btn-sm">
-            View Details
-          </button>
-        </div>
-      </div>
-    }
-  </div>
+    </div>
 </div>

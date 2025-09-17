@@ -1,50 +1,50 @@
 <div class="container my-5">
-  <h3 class="text-center mb-4">My Links</h3>
+    <h3 class="text-center mb-4">My Links</h3>
 
-  <!-- Search Bar -->
-  <div class="mb-4 text-center">
-    <input type="text" class="form-control d-inline-block w-75 w-md-50"
-           placeholder="Search by original link or shorten ID..."
-           [(ngModel)]="searchTerm">
-  </div>
+    <!-- Search Bar -->
+    <div class="mb-4 text-center">
+        <input type="text" class="form-control d-inline-block w-75 w-md-50"
+               placeholder="Search by original link or shorten ID..."
+               [(ngModel)]="searchTerm">
+    </div>
+    <div class="form-text text-danger">{{ errorMessage }}</div>
+    <div class="d-flex overflow-auto gap-3 pb-3">
+        @for (link of links | filterLinkPipe: searchTerm; track link.shorten_link) {
+            <div class="card flex-shrink-0 shadow-sm border-0" style="width: 50%; background-color: #f8faff;">
+                <div class="card-body">
+                    <h5 class="card-title text-primary mb-3">
+                        Shorten ID: {{ link.shorten_link }}
+                    </h5>
 
-  <div class="d-flex overflow-auto gap-3 pb-3">
-    @for (link of links | filterLinkPipe: searchTerm; track link.shorten_link) {
-      <div class="card flex-shrink-0 shadow-sm border-0" style="width: 50%; background-color: #f8faff;">
-        <div class="card-body">
-          <h5 class="card-title text-primary mb-3">
-            Shorten ID: {{ link.shorten_link }}
-          </h5>
+                    <p class="mb-2">
+                        <strong>Original Link:</strong><br>
+                        <a [href]="link.original_link" target="_blank" class="text-decoration-none">
+                            {{ link.original_link }}
+                        </a>
+                    </p>
 
-          <p class="mb-2">
-            <strong>Original Link:</strong><br>
-            <a [href]="link.original_link" target="_blank" class="text-decoration-none">
-              {{ link.original_link }}
-            </a>
-          </p>
+                    <p class="mb-1"><strong>Publisher:</strong> {{ link.publisher_name }}</p>
+                    <p class="mb-1"><strong>Email:</strong> {{ link.publisher_email }}</p>
+                    <p class="mb-3"><strong>Visitors:</strong> {{ link.number_of_visitors }}</p>
 
-          <p class="mb-1"><strong>Publisher:</strong> {{ link.publisher_name }}</p>
-          <p class="mb-1"><strong>Email:</strong> {{ link.publisher_email }}</p>
-          <p class="mb-3"><strong>Visitors:</strong> {{ link.number_of_visitors }}</p>
-
-          <div class="d-flex justify-content-between">
-            <button class="btn btn-outline-primary btn-sm" (click)="viewDetails(link.shorten_link)">
-              Details
-            </button>
-            <button class="btn btn-outline-danger btn-sm" (click)="deleteLink(link.shorten_link)">
-              Delete
-            </button>
-          </div>
-        </div>
-      </div>
-    } @empty {
-      <div class="card flex-shrink-0 shadow-sm border-0 text-center d-flex align-items-center justify-content-center"
-           style="width: 100%; height: 250px; background-color: #f0f4ff;">
-        <div class="card-body">
-          <h5 class="text-muted">No links found</h5>
-          <p class="small text-secondary mb-0">Try adding a new link or adjusting your search.</p>
-        </div>
-      </div>
-    }
-  </div>
+                    <div class="d-flex justify-content-between">
+                        <button class="btn btn-outline-primary btn-sm" (click)="viewDetails(link.shorten_link)">
+                            Details
+                        </button>
+                        <button class="btn btn-outline-danger btn-sm" (click)="deleteLink(link.shorten_link)">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        } @empty {
+            <div class="card flex-shrink-0 shadow-sm border-0 text-center d-flex align-items-center justify-content-center"
+                 style="width: 100%; height: 250px; background-color: #f0f4ff;">
+                <div class="card-body">
+                    <h5 class="text-muted">No links found</h5>
+                    <p class="small text-secondary mb-0">Try adding a new link or adjusting your search.</p>
+                </div>
+            </div>
+        }
+    </div>
 </div>

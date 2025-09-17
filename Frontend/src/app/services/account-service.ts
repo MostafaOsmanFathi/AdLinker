@@ -9,8 +9,8 @@ import {BehaviorSubject, Observable} from 'rxjs';
 })
 export class AccountService {
     private baseUrl: string = environment.apiUrl;
-    private userData: BehaviorSubject<any> = new BehaviorSubject({});
-    private jwt_token: BehaviorSubject<string> = new BehaviorSubject<string>("");
+    private userData: BehaviorSubject<any> = new BehaviorSubject(JSON.parse(<string>localStorage.getItem('userData')) || {});
+    private jwt_token: BehaviorSubject<string> = new BehaviorSubject<string>(localStorage.getItem('jwt_token') || "");
 
     constructor(private http: HttpClient) {
 
