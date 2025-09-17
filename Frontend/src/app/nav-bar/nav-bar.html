@@ -28,25 +28,31 @@
                     </li>
                 }
 
-                <!--        @if (loggedIn) {-->
-                <li class="nav-item d-flex">
-                    <a class="nav-link px-3" routerLink="/account/logout" routerLinkActive="active-link"
-                       (click)="logout()">Logout</a>
-                </li>
-                <li class="nav-item d-flex">
-                    <a class="nav-link px-3" routerLink="/profile" routerLinkActive="active-link">Profile</a>
-                </li>
-                <li class="nav-item d-flex">
-                    <a class="nav-link px-3" routerLink="/publisher" routerLinkActive="active-link">Publisher</a>
-                </li>
-                <!--        } @else {-->
-                <li class="nav-item">
-                    <a class="nav-link px-3" routerLink="/account/login" routerLinkActive="active-link">login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link px-3" routerLink="/account/register" routerLinkActive="active-link">register</a>
-                </li>
-                <!--        }-->
+                @if (user_type === "publisher") {
+                    <li class="nav-item d-flex">
+                        <a class="nav-link px-3" routerLink="/publisher" routerLinkActive="active-link">Publisher</a>
+                    </li>
+                }
+
+                @if (loggedIn) {
+                    <li class="nav-item d-flex">
+                        <a class="nav-link px-3" routerLink="/account/logout" routerLinkActive="active-link"
+                           (click)="logout()">Logout</a>
+                    </li>
+                    <li class="nav-item d-flex">
+                        <a class="nav-link px-3" routerLink="/profile" routerLinkActive="active-link">Profile</a>
+                    </li>
+                } @else {
+
+
+                    <li class="nav-item">
+                        <a class="nav-link px-3" routerLink="/account/login" routerLinkActive="active-link">login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" routerLink="/account/register"
+                           routerLinkActive="active-link">register</a>
+                    </li>
+                }
             </ul>
         </div>
     </div>

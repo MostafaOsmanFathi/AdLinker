@@ -27,11 +27,13 @@ export class AccountService {
 
     setJwtToken(token: string): void {
         this.jwt_token.next(token);
+        localStorage.setItem('jwt_token', token);
     }
 
     // Update user object
     setUserObject(user: any): void {
         this.userData.next(user);
+        localStorage.setItem('userData', JSON.stringify(user)); // update localStorage
     }
 
     // Observables to subscribe to
