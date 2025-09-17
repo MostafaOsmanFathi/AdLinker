@@ -1,0 +1,54 @@
+<div class="container py-5">
+    <div class="card shadow-lg p-4 bg-light">
+        <h2 class="text-center mb-4">
+            <img src="/logo.png"
+                 alt="ShortyLink Logo"
+                 height="50"
+                 class="me-2" width="51"> Links Overview</h2>
+
+        @if (links && links.length > 0) {
+            <div class="row g-4">
+                @for (link of links; track $index) {
+                    <div class="col-md-4">
+                        <div class="card h-100 text-center p-4 border-0 shadow-sm link-card">
+                            <h4 class="mb-2 text-primary">
+                                <i class="bi bi-person-circle me-1"></i>
+                                {{ link.publisher_name }}
+                            </h4>
+
+                            <p class="small text-muted mb-2">
+                                <strong>ID:</strong> {{ link.shortenLinkId }}
+                            </p>
+
+                            <p class="mb-3">
+                                <strong>
+                                    <img src="/logo.png"
+                                         alt="ShortyLink Logo"
+                                         height="20"
+                                         class="me-2" width="20">
+
+                                    Shorted Link:</strong><br>
+                                <a class="text-decoration-none text-success fw-bold"
+                                   [routerLink]="'/shyln/' + link.shortenLinkId">
+                                    {{ clientUrl + '/shyln/' + link.shortenLinkId }}
+                                </a>
+                            </p>
+
+                            <p class="lead mb-0 text-danger">
+                                <i class="bi bi-bar-chart-line-fill me-1"></i>
+                                <strong>Visits:</strong> {{ link.numberOfVisits }}
+                            </p>
+                        </div>
+                    </div>
+                }
+            </div>
+        } @else {
+            <div class="text-center mt-5">
+                <div class="card feature-card p-4">
+                    <h4>No links available</h4>
+                    <p class="text-muted">Your shortened links will appear here once created.</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

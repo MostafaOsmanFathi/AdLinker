@@ -14,6 +14,7 @@ import {ProfileDetails} from './profile/profile-details/profile-details';
 import {publisherGuardGuard} from './guards/publisher-guard-guard';
 import {authenticatedGuardGuard} from "./guards/authenticated-guard-guard";
 import {ShortenLink} from "./shorten-link/shorten-link";
+import {VisibleLinks} from "./visible-links/visible-links";
 
 export const routes: Routes = [
     {
@@ -74,6 +75,10 @@ export const routes: Routes = [
     {
         path: 'shyln/:linkId',
         component: ShortenLink
+    },
+    {
+        path:"public-links",
+        component: VisibleLinks
     }
     ,
     {
