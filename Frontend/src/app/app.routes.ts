@@ -12,6 +12,7 @@ import {VisitHistory} from './profile/visit-history/visit-history';
 import {UpdateProfile} from './profile/update-profile/update-profile';
 import {ProfileDetails} from './profile/profile-details/profile-details';
 import {publisherGuardGuard} from './guards/publisher-guard-guard';
+import {authenticatedGuardGuard} from "./guards/authenticated-guard-guard";
 
 export const routes: Routes = [
   {
@@ -36,6 +37,7 @@ export const routes: Routes = [
   }, {
     path: 'profile',
     component: Profile,
+    canActivate:[authenticatedGuardGuard],
     children: [
       {
         path: 'details',
@@ -57,7 +59,7 @@ export const routes: Routes = [
   }, {
     path: 'publisher',
     component: PublisherHome,
-    canActivate:[publisherGuardGuard],
+    canActivate:[publisherGuardGuard,authenticatedGuardGuard],
     children: [
       {
         path: 'my-links',

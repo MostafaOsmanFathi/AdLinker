@@ -2,7 +2,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {Account} from '../intrefaces/acccount';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, finalize, Observable} from 'rxjs';
+import {Router} from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,7 @@ export class AccountService {
     private userData: BehaviorSubject<any> = new BehaviorSubject(JSON.parse(<string>localStorage.getItem('userData')) || {});
     private jwt_token: BehaviorSubject<string> = new BehaviorSubject<string>(localStorage.getItem('jwt_token') || "");
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
 
     }
 
@@ -30,13 +31,11 @@ export class AccountService {
         localStorage.setItem('jwt_token', token);
     }
 
-    // Update user object
     setUserObject(user: any): void {
         this.userData.next(user);
         localStorage.setItem('userData', JSON.stringify(user)); // update localStorage
     }
 
-    // Observables to subscribe to
     getJwtTokenObservable(): Observable<string> {
         return this.jwt_token.asObservable();
     }
@@ -51,7 +50,7 @@ export class AccountService {
     }
 
 
-    getAuthHeader(): HttpHeaders {
+    private getAuthHeader(): HttpHeaders {
         const token = localStorage.getItem("jwt_token");
         return new HttpHeaders({
             'Authorization': `Bearer ${token}`,
@@ -62,8 +61,19 @@ export class AccountService {
     logoutUser() {
         const headers = this.getAuthHeader();
         const body = {};
-        return this.http.post(this.baseUrl + "/account/logout", body, {headers});
+        return this.http.post(this.baseUrl + "/account/logout", body, {headers}).pipe(
+            finalize(() => {
+                localStorage.removeItem("jwt_token");
+                localStorage.removeItem("user_data");
+                this.clearObserveData();
+                this.router.navigate(['/']);
+            })
+        );
     }
 
+    checkAuth() {
+        const header = this.getAuthHeader();
+        return this.http.get(this.baseUrl + "/account/auth", {headers: header})
+    }
 
 }

@@ -36,13 +36,6 @@ export class NavBar {
 
     logout() {
         alert("logout")
-        this.accountService.logoutUser().pipe(
-            finalize(() => {
-                localStorage.removeItem("jwt_token");
-                localStorage.removeItem("user_data");
-                this.accountService.clearObserveData();
-                this.router.navigate(['/']);
-            })
-        ).subscribe();
+        this.accountService.logoutUser().subscribe();
     }
 }
