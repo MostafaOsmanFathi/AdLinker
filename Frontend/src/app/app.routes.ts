@@ -69,5 +69,9 @@ export const routes: Routes = [
         component: CreateLink
       }
     ]
-  }
+  },
+    {
+        path:'**',
+        component: Home
+    }
 ];
