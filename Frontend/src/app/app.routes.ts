@@ -71,6 +71,10 @@ export const routes: Routes = [
     ]
   },
     {
+        path:"shyln/:linkId"
+    }
+  ,
+    {
         path:'**',
         component: Home
     }

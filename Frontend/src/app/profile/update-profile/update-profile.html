@@ -1,1 +1,76 @@
-<p>update-profile works!</p>
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow p-4" style="width: 100%; max-width: 450px;">
+        <h3 class="card-title text-center mb-4">Change Password</h3>
+        <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+
+            <div class="mb-3">
+                <label for="oldPassword" class="form-label">Old password</label>
+                <input type="password" id="oldPassword" formControlName="oldPassword" class="form-control">
+
+                @if (formControl['oldPassword'].invalid && (formControl['oldPassword'].touched || submitted)) {
+
+                    @if (formControl['oldPassword'].errors && formControl['oldPassword'].errors['required']) {
+                        <div class="form-text text-danger"> old password required</div>
+                    }
+                    @if (formControl['oldPassword'].errors && formControl['oldPassword'].errors['pattern']) {
+                        <div class="form-text text-danger"> Password must be at least 8 characters, include uppercase,
+                            lowercase,
+                            number, and special character.
+                        </div>
+                    }
+
+                }
+
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">New Password</label>
+                <input type="password" id="password" formControlName="password" class="form-control">
+
+                @if (formControl['password'].invalid && (formControl['password'].touched || submitted)) {
+
+                    @if (formControl['password'].errors && formControl['password'].errors['required']) {
+                        <div class="form-text text-danger"> password required</div>
+                    }
+                    @if (formControl['password'].errors && formControl['password'].errors['pattern']) {
+                        <div class="form-text text-danger"> Password must be at least 8 characters, include uppercase,
+                            lowercase,
+                            number, and special character.
+                        </div>
+                    }
+
+                }
+
+            </div>
+
+            <div class="mb-3">
+                <label for="password Again" class="form-label">Confirm Password</label>
+                <input type="password" id="password-again" formControlName="passwordAgain" class="form-control">
+                @if ((formControl['passwordAgain'].invalid || updateForm.errors && updateForm.errors['passwordMismatch'] !=
+                    null)
+                && (formControl['passwordAgain'].touched || submitted)) {
+                    @if (formControl['passwordAgain'].errors && formControl['passwordAgain'].errors['required']) {
+                        <div class="form-text text-danger"> password confirm required</div>
+                    }
+                    @if (updateForm.errors && updateForm.errors['passwordMismatch'] != null) {
+                        <div class="form-text text-danger"> password confirm must match password</div>
+                    }
+                }
+
+            </div>
+            <button type="submit" class="btn btn-primary w-100" [disabled]="loading || updateForm.invalid">
+                @if (loading) {
+                    <span class="spinner-border spinner-border-sm me-2"></span> Registering ...
+                } @else {
+                    Register
+                }
+            </button>
+            @if (errorMessage != "") {
+                <div class="form-text text-danger"> {{ errorMessage }}</div>
+            } @else if (successMessage != "") {
+                <div class="form-text text-success"> {{ successMessage }}</div>
+            }
+        </form>
+        <div class="text-center mt-3">
+        </div>
+    </div>
+</div>

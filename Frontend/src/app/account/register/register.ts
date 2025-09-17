@@ -59,8 +59,6 @@ export class Register {
 
   onSubmit() {
     this.submitted = true;
-    console.log(this.registerForm);
-    console.log("is valid", this.registerForm.valid);
     if (this.registerForm.invalid) {
       return
     }
@@ -80,7 +78,7 @@ export class Register {
           () => {
             this.router.navigate(['/account/login']);
           },
-          2000
+          1000
         )
       },
       (error) => {

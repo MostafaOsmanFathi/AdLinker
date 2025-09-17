@@ -45,6 +45,10 @@ export class AccountService {
         return this.userData.asObservable();
     }
 
+    getUserValue() {
+        return this.userData.value;
+    }
+
     clearObserveData(): void {
         this.setJwtToken("");
         this.setUserObject({});
@@ -100,7 +104,7 @@ export class AccountService {
         )
     }
 
-    upDateAccountData(updatedData: any) {
+    updateAccountData(updatedData: any) {
         const header = this.getAuthHeader();
         return this.http.put(this.baseUrl + "/account/my-account", updatedData, {headers: header})
     }

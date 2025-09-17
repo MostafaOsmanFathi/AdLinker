@@ -68,18 +68,17 @@ export class Login {
                                 //TODO
                                 this.router.navigate(['/']);
                             } else if (response.user.role === 'user') {
-                                //TODO
-                                this.router.navigate(['/']);
+                                this.router.navigate(['/profile']);
                             } else {
                                 throw new Error("Login Failed");
                             }
                         },
-                        2000
+                        1000
                     )
                 },
                 error: (error) => {
                     this.loading = false;
-                    this.errorMessage = error.message
+                    this.errorMessage = "Wrong Password"
                 }
 
             }
