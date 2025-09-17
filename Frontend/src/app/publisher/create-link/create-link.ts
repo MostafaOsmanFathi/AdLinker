@@ -21,8 +21,8 @@ export class CreateLink {
     loading: boolean = false;
     baseUrl: string = environment.apiUrl;
     submittedBefore: boolean = false;
-    fullUrlBase: string = this.baseUrl + '/link/forward/';
-    fullUrl: string = this.baseUrl + '/link/forward/';
+    fullUrlBase: string = environment.shortenBaseUrl;
+    fullUrl: string = environment.shortenBaseUrl;
 
 
     constructor(private fb: FormBuilder, private publisherService: PublisherService) {

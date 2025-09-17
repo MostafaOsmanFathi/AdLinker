@@ -2,8 +2,9 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {Account} from '../intrefaces/acccount';
-import {BehaviorSubject, finalize, Observable} from 'rxjs';
+import {BehaviorSubject, finalize, map, Observable} from 'rxjs';
 import {Router} from "@angular/router";
+import {Link} from "../intrefaces/link";
 
 @Injectable({
     providedIn: 'root'
@@ -74,6 +75,27 @@ export class AccountService {
     checkAuth() {
         const header = this.getAuthHeader();
         return this.http.get(this.baseUrl + "/account/auth", {headers: header})
+    }
+
+    getMyAccountDetails() {
+        const header = this.getAuthHeader();
+        return this.http.get(this.baseUrl + "/account/my-account", {headers: header})
+    }
+
+    getMyVisitHistory(): Observable<any[]> {
+        const header = this.getAuthHeader();
+        return this.http.get<any[]>(this.baseUrl + "/account/my-visits-history", {headers: header});
+
+    }
+
+    deleteMyAccount() {
+        const header = this.getAuthHeader();
+        return this.http.delete(this.baseUrl + "/account/my-account", {headers: header})
+    }
+
+    upDateAccountData(updatedData: any) {
+        const header = this.getAuthHeader();
+        return this.http.put(this.baseUrl + "/account/my-account", updatedData, {headers: header})
     }
 
 }
