@@ -29,4 +29,9 @@ accountRouter
     .get(authorization.loggedInCheck, accountController.getAllAccountVisits)
 
 
+accountRouter
+    .route('/auth')
+    .get(authorization.loggedInCheck, (req, res) => {
+        res.status(200).json({message: "you are authenticated"});
+    });
 module.exports = accountRouter;
