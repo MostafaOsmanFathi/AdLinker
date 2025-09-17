@@ -46,4 +46,14 @@ export class PublisherService {
         const headers = this.getAuthHeader();
         return this.http.delete(this.apiUrl + '/publisher/mangeLink/' + shortenId, {headers: headers})
     }
+
+    setLinkPublic(shortenId: string) {
+        const header = this.getAuthHeader();
+        return this.http.get(this.apiUrl + "/publisher/set-link-public/" + shortenId, {headers: header})
+    }
+
+    setLinkPrivate(shortenId: string) {
+        const header = this.getAuthHeader();
+        return this.http.get(this.apiUrl + "/publisher/set-link-private/" + shortenId, {headers: header})
+    }
 }

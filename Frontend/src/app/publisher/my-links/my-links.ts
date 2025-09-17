@@ -39,7 +39,33 @@ export class MyLinks {
         )
     }
 
-    invertVisibility(shortenId: string) {
+    invertVisibility(shortenId: string, currentVisibility: boolean, index: number) {
+        if (currentVisibility) {
+            this.publisherService.setLinkPrivate(shortenId)
+                .subscribe(
+                    {
+                        next: (data) => {
+                            this.links[index].public_visible = !this.links[index].public_visible;
+                        },
+                        error: (error) => {
+                            this.errorMessage = "could not find link";
+                            console.log(error)
+                        }
+                    }
+                )
+        } else {
+            this.publisherService.setLinkPublic(shortenId).subscribe(
+                {
+                    next: (data) => {
+                        this.links[index].public_visible = !this.links[index].public_visible;
+                    },
+                    error: (error) => {
+                        this.errorMessage = "could not find link";
+                        console.log(error)
+                    }
+                }
+            )
+        }
     }
 
     deleteLink(id: string, index: number) {
@@ -54,5 +80,4 @@ export class MyLinks {
             }
         )
     }
-
 }

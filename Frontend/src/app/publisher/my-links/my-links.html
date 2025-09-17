@@ -34,10 +34,12 @@
                     <p class="mb-3"><strong>Visitors:</strong> {{ link.number_of_visitors }}</p>
 
                     <div class="d-flex justify-content-between">
-                        <button class="btn btn-sm" [ngClass]="!link.public_visible ?'btn-outline-primary':'btn-outline-danger'"  (click)="invertVisibility(link.shorten_link)">
+                        <button class="btn btn-sm"
+                                [ngClass]="!link.public_visible ?'btn-outline-primary':'btn-outline-danger'"
+                                (click)="invertVisibility(link.shorten_link,link.public_visible,$index)">
                             @if (link.public_visible) {
                                 make it private
-                            }@else{
+                            } @else {
                                 make it public
                             }
                         </button>

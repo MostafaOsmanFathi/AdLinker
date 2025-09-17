@@ -56,7 +56,7 @@ publisherRouter
         authorization.authorizePublisherLinkParam, linkController.setLinkPublic);
 
 publisherRouter
-    .route("/set-link-public/:linkID")
+    .route("/set-link-private/:linkID")
     .get(
         validateLink.validateParamLink,
         authorization.authorizeUserType("publisher"),
