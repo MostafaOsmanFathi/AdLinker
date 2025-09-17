@@ -39,9 +39,17 @@ export class MyLinks {
         // this.router.navigate(['/publisher/link', id]);
     }
 
-    deleteLink(id: string) {
-        // Call API to delete
-        // console.log("Deleting link with ID:", id);
+    deleteLink(id: string, index: number) {
+        this.publisherService.deleteLinkById(id).subscribe(
+            {
+                next: (data) => {
+                    this.links.splice(index, 1);
+                },
+                error: (error) => {
+                    this.errorMessage = JSON.stringify(error);
+                }
+            }
+        )
     }
 
 }

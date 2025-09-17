@@ -41,4 +41,8 @@ export class PublisherService {
         return this.http.post<any>(this.apiUrl + '/publisher/createLink', {original_link: original_link}, {headers: headers})
     }
 
+    deleteLinkById(shortenId: string) {
+        const headers = this.getAuthHeader();
+        return this.http.delete(this.apiUrl + '/publisher/mangeLink/' + shortenId, {headers: headers})
+    }
 }
