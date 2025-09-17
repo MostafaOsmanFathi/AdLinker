@@ -13,69 +13,71 @@ import {UpdateProfile} from './profile/update-profile/update-profile';
 import {ProfileDetails} from './profile/profile-details/profile-details';
 import {publisherGuardGuard} from './guards/publisher-guard-guard';
 import {authenticatedGuardGuard} from "./guards/authenticated-guard-guard";
+import {ShortenLink} from "./shorten-link/shorten-link";
 
 export const routes: Routes = [
-  {
-    path: '',
-    component: Home
-  }, {
-    path: "account",
-    children: [
-      {
-        path: 'login',
-        component: Login
-      },
-      {
-        path: 'register',
-        component: Register
-      },
-      {
-        path: 'rest-password',
-        component: ResetPassowrd
-      },
-    ]
-  }, {
-    path: 'profile',
-    component: Profile,
-    canActivate:[authenticatedGuardGuard],
-    children: [
-      {
-        path: 'details',
-        component: ProfileDetails,
-      },
-      {
-        path: 'update-profile',
-        component: UpdateProfile
-      }, {
-        path: 'visit-history',
-        component: VisitHistory
+    {
+        path: '',
+        component: Home
+    }, {
+        path: "account",
+        children: [
+            {
+                path: 'login',
+                component: Login
+            },
+            {
+                path: 'register',
+                component: Register
+            },
+            {
+                path: 'rest-password',
+                component: ResetPassowrd
+            },
+        ]
+    }, {
+        path: 'profile',
+        component: Profile,
+        canActivate: [authenticatedGuardGuard],
+        children: [
+            {
+                path: 'details',
+                component: ProfileDetails,
+            },
+            {
+                path: 'update-profile',
+                component: UpdateProfile
+            }, {
+                path: 'visit-history',
+                component: VisitHistory
 
-      },
-      {
-        path: 'delete-my-account',
-        component: DeleteMyAccount
-      }
-    ]
-  }, {
-    path: 'publisher',
-    component: PublisherHome,
-    canActivate:[publisherGuardGuard,authenticatedGuardGuard],
-    children: [
-      {
-        path: 'my-links',
-        component: MyLinks
-      }, {
-        path: 'add-link',
-        component: CreateLink
-      }
-    ]
-  },
+            },
+            {
+                path: 'delete-my-account',
+                component: DeleteMyAccount
+            }
+        ]
+    }, {
+        path: 'publisher',
+        component: PublisherHome,
+        canActivate: [publisherGuardGuard, authenticatedGuardGuard],
+        children: [
+            {
+                path: 'my-links',
+                component: MyLinks
+            }, {
+                path: 'add-link',
+                component: CreateLink
+            }
+        ]
+    },
     {
-        path:"shyln/:linkId"
+        path: 'shyln/:linkId',
+        component: ShortenLink
     }
-  ,
+    ,
     {
-        path:'**',
+        path: '**',
         component: Home
     }
 ];
