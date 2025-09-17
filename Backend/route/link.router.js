@@ -16,6 +16,8 @@ linkRouter
     .route("/getLink/:linkID")
     .get(linkValidator.validateFrowardLink, linkController.getLink);
 
-linkRouter.route('public-visible').get(linkController.getPublicVisible);
+linkRouter
+    .route('/public-visible')
+    .get(linkController.getPublicVisible);
 
 module.exports = linkRouter;
