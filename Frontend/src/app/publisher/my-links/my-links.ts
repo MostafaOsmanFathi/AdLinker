@@ -4,12 +4,14 @@ import {FilterLinkPipePipe} from '../../pipes/filter-link-pipe-pipe';
 import {Link} from "../../intrefaces/link"
 import {PublisherService} from "../../services/publisher-service";
 import {environment} from "../../../environments/environment";
+import {NgClass} from "@angular/common";
 
 @Component({
     selector: 'app-my-links',
     imports: [
         FormsModule,
-        FilterLinkPipePipe
+        FilterLinkPipePipe,
+        NgClass
     ],
     templateUrl: './my-links.html',
     styleUrl: './my-links.css'
@@ -37,8 +39,7 @@ export class MyLinks {
         )
     }
 
-    viewDetails(id: string) {
-        // this.router.navigate(['/publisher/link', id]);
+    invertVisibility(shortenId: string) {
     }
 
     deleteLink(id: string, index: number) {

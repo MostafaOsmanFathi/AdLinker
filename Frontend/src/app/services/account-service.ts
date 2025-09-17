@@ -4,7 +4,6 @@ import {environment} from '../../environments/environment';
 import {Account} from '../intrefaces/acccount';
 import {BehaviorSubject, finalize, map, Observable} from 'rxjs';
 import {Router} from "@angular/router";
-import {Link} from "../intrefaces/link";
 
 @Injectable({
     providedIn: 'root'

@@ -30,7 +30,8 @@ export class PublisherService {
                     shorten_link: item.shorten_link,
                     publisher_name: item.publisher_name,
                     publisher_email: item.publisher_email,
-                    number_of_visitors: item.number_of_visitors
+                    number_of_visitors: item.number_of_visitors,
+                    public_visible: item.public_visible
                 } as Link))
             )
         );

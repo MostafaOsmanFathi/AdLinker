@@ -13,7 +13,8 @@
             <div class="card flex-shrink-0 shadow-sm border-0" style="width: 50%; background-color: #f8faff;">
                 <div class="card-body">
                     <h5 class="card-title text-primary mb-3">
-                        Shorten ID:<a target="_blank" [href]="shortenBaseUrl + link.shorten_link">{{ link.shorten_link }}</a>
+                        Shorten ID:<a target="_blank"
+                                      [href]="shortenBaseUrl + link.shorten_link">{{ link.shorten_link }}</a>
                     </h5>
                     <p class="mb-2">
                         <strong>Original Link:</strong><br>
@@ -24,11 +25,21 @@
 
                     <p class="mb-1"><strong>Publisher:</strong> {{ link.publisher_name }}</p>
                     <p class="mb-1"><strong>Email:</strong> {{ link.publisher_email }}</p>
+                    <p class="mb-1">
+                        <strong>Public visibility: </strong>
+                        <span [ngClass]="link.public_visible ? 'text-success' : 'text-danger'">
+                                    {{ link.public_visible ? 'Yes' : 'No' }}
+                        </span>
+                    </p>
                     <p class="mb-3"><strong>Visitors:</strong> {{ link.number_of_visitors }}</p>
 
                     <div class="d-flex justify-content-between">
-                        <button class="btn btn-outline-primary btn-sm" (click)="viewDetails(link.shorten_link)">
-                            Edit Original Link
+                        <button class="btn btn-sm" [ngClass]="!link.public_visible ?'btn-outline-primary':'btn-outline-danger'"  (click)="invertVisibility(link.shorten_link)">
+                            @if (link.public_visible) {
+                                make it private
+                            }@else{
+                                make it public
+                            }
                         </button>
                         <button class="btn btn-outline-danger btn-sm" (click)="deleteLink(link.shorten_link,$index)">
                             Delete
