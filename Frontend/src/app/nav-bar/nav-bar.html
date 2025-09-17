@@ -34,17 +34,15 @@
                     </li>
                 }
 
-                @if (loggedIn) {
+                @if (user_type) {
+                    <li class="nav-item d-flex">
+                        <a class="nav-link px-3" routerLink="/profile" routerLinkActive="active-link">Profile</a>
+                    </li>
                     <li class="nav-item d-flex">
                         <a class="nav-link px-3" routerLink="/account/logout" routerLinkActive="active-link"
                            (click)="logout()">Logout</a>
                     </li>
-                    <li class="nav-item d-flex">
-                        <a class="nav-link px-3" routerLink="/profile" routerLinkActive="active-link">Profile</a>
-                    </li>
                 } @else {
-
-
                     <li class="nav-item">
                         <a class="nav-link px-3" routerLink="/account/login" routerLinkActive="active-link">login</a>
                     </li>
