@@ -19,70 +19,94 @@ import {VisibleLinks} from "./visible-links/visible-links";
 export const routes: Routes = [
     {
         path: '',
-        component: Home
-    }, {
-        path: "account",
+        component: Home,
+        title: 'Home | ShortyLink'
+    },
+    {
+        path: 'account',
         children: [
             {
                 path: 'login',
-                component: Login
+                component: Login,
+                title: 'Login | ShortyLink'
             },
             {
                 path: 'register',
-                component: Register
+                component: Register,
+                title: 'Register | ShortyLink'
             },
             {
                 path: 'rest-password',
-                component: ResetPassowrd
-            },
+                component: ResetPassowrd,
+                title: 'Reset Password | ShortyLink'
+            }
         ]
-    }, {
+    },
+    {
         path: 'profile',
         component: Profile,
         canActivate: [authenticatedGuardGuard],
+        title: 'My Profile | ShortyLink',
         children: [
             {
                 path: 'details',
                 component: ProfileDetails,
+                title: 'Profile Details | ShortyLink'
             },
             {
                 path: 'update-profile',
-                component: UpdateProfile
-            }, {
+                component: UpdateProfile,
+                title: 'Update Profile | ShortyLink'
+            },
+            {
                 path: 'visit-history',
-                component: VisitHistory
-
+                component: VisitHistory,
+                title: 'Visit History | ShortyLink'
             },
             {
                 path: 'delete-my-account',
-                component: DeleteMyAccount
+                component: DeleteMyAccount,
+                title: 'Delete Account | ShortyLink'
             }
         ]
-    }, {
+    },
+    {
+        path: 'visit-history',
+        component: VisitHistory,
+        canActivate: [authenticatedGuardGuard],
+        title: 'Visit History | ShortyLink'
+    },
+    {
         path: 'publisher',
         component: PublisherHome,
         canActivate: [publisherGuardGuard, authenticatedGuardGuard],
+        title: 'Publisher Dashboard | ShortyLink',
         children: [
             {
                 path: 'my-links',
-                component: MyLinks
-            }, {
+                component: MyLinks,
+                title: 'My Links | ShortyLink'
+            },
+            {
                 path: 'add-link',
-                component: CreateLink
+                component: CreateLink,
+                title: 'Create Link | ShortyLink'
             }
         ]
     },
     {
         path: 'shyln/:linkId',
-        component: ShortenLink
+        component: ShortenLink,
+        title: 'Redirecting... | ShortyLink'
     },
     {
-        path:"public-links",
-        component: VisibleLinks
-    }
-    ,
+        path: 'public-links',
+        component: VisibleLinks,
+        title: 'Public Links | ShortyLink'
+    },
     {
         path: '**',
-        component: Home
+        component: Home,
+        title: 'Home | ShortyLink'
     }
 ];
