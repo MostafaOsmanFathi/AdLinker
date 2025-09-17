@@ -13,13 +13,8 @@
             <div class="card flex-shrink-0 shadow-sm border-0" style="width: 50%; background-color: #f8faff;">
                 <div class="card-body">
                     <h5 class="card-title text-primary mb-3">
-                        Shorten ID: {{ link.shorten_link }}
+                        Shorten ID:<a target="_blank" [href]="shortenBaseUrl + link.shorten_link">{{ link.shorten_link }}</a>
                     </h5>
-
-                    <h5 class="card-title text-primary mb-3">
-                        Shorten Link: {{ link.shorten_link }}
-                    </h5>
-
                     <p class="mb-2">
                         <strong>Original Link:</strong><br>
                         <a [href]="link.original_link" target="_blank" class="text-decoration-none">
@@ -33,7 +28,7 @@
 
                     <div class="d-flex justify-content-between">
                         <button class="btn btn-outline-primary btn-sm" (click)="viewDetails(link.shorten_link)">
-                            Details
+                            Edit Original Link
                         </button>
                         <button class="btn btn-outline-danger btn-sm" (click)="deleteLink(link.shorten_link,$index)">
                             Delete
