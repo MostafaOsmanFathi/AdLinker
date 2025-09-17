@@ -37,7 +37,7 @@
           <option value="user" selected disabled>select user Type ...</option>
           <option value="user">User</option>
           <option value="publisher">Publisher</option>
-          <option value="admin">Admin</option>
+          <option value="admin" disabled >Admin</option>
         </select>
         @if (formControl['userType'].errors && (formControl['userType'].touched || submitted)) {
           <div class="form-text text-danger"> select user type</div>
