@@ -3,6 +3,7 @@ import {FormsModule} from '@angular/forms';
 import {FilterLinkPipePipe} from '../../pipes/filter-link-pipe-pipe';
 import {Link} from "../../intrefaces/link"
 import {PublisherService} from "../../services/publisher-service";
+import {environment} from "../../../environments/environment";
 
 @Component({
     selector: 'app-my-links',
@@ -17,6 +18,7 @@ export class MyLinks {
     searchTerm: string = "";
     errorMessage: string = "";
     links: Link[] = [];
+    shortenBaseUrl: string = environment.shortenBaseUrl;
 
     constructor(private publisherService: PublisherService) {
 

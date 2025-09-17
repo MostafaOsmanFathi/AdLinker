@@ -23,7 +23,6 @@ export class NavBar {
         this.accountService.getUserObservable().subscribe(
             {
                 next: (data) => {
-                    console.log(data);
                     if (data.role) {
                         this.user_type = data.role;
                     } else {
