@@ -48,5 +48,19 @@ publisherRouter
         authorization.authorizeUserType("publisher"),
         linkController.createLink
     );
+publisherRouter
+    .route("/set-link-public/:linkID")
+    .get(
+        validateLink.validateParamLink,
+        authorization.authorizeUserType("publisher"),
+        authorization.authorizePublisherLinkParam, linkController.setLinkPublic);
+
+publisherRouter
+    .route("/set-link-public/:linkID")
+    .get(
+        validateLink.validateParamLink,
+        authorization.authorizeUserType("publisher"),
+        authorization.authorizePublisherLinkParam, linkController.setLinkPrivate);
+
 
 module.exports = publisherRouter;

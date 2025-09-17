@@ -23,6 +23,10 @@ const linkSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
+    public_visible:{
+        type: Boolean,
+        default: false,
+    }
 });
 
 const linkModel = mongoose.model("links", linkSchema);

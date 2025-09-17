@@ -168,7 +168,46 @@ let publisherDeleteLink = async (req, res) => {
         res.status(500).send({});
     }
 };
+const getPublicVisible = async (req, res) => {
+    try {
+        const result = await linkModel.find({public_visible: true});
+        return res.status(200).json(result);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
 
+const setLinkPublic = async (req, res) => {
+    try {
+        const shortenLinkId = req.params.linkID;
+        const result = await linkModel.findOne({shorten_link: shortenLinkId})
+        if (!result) {
+            return res.status(404).json({error: "Link not found"});
+        }
+        result.public_visible = true;
+        await result.save()
+        res.status(200).json({message: "link set successfully"});
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err);
+    }
+}
+
+const setLinkPrivate = async (req, res) => {
+    try {
+        const shortenLinkId = req.params.linkID;
+        const result = await linkModel.findOne({shorten_link: shortenLinkId})
+        if (!result) {
+            return res.status(404).json({error: "Link not found"});
+        }
+        result.public_visible = false;
+        await result.save()
+        res.status(200).json({message: "link set successfully"});
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err);
+    }
+}
 module.exports = {
     getAllLinks,
     getAllPublisherLinks,
@@ -180,5 +219,8 @@ module.exports = {
     getLink,
     publisherChangeLink,
     publisherDeleteLink,
-    getforwardLink
+    getforwardLink,
+    getPublicVisible,
+    setLinkPublic,
+    setLinkPrivate
 };
